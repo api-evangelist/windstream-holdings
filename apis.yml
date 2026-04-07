@@ -1,7 +1,12 @@
 aid: windstream-holdings
-url: https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/apis.yml
 modified: '2026-03-24'
 apis: []
 common:
   - type: Website
     url: https://www.windstream-holdings.com
+description: >-
+  Windstream Holdings is a leading provider of advanced network communications and
+  technology solutions including managed services, cloud computing, and broadband
+  to consumers and businesses across the United States.
