@@ -1,0 +1,230 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Windstream Enterprise Contact Center Services API"
+  description: >-
+    Shared consumer definition for the Windstream Enterprise CCS (Contact Center
+    Services) API. Provides call routing, agent state management, tenant configuration,
+    ACD/queue monitoring, and SMS/MMS management for contact center operations.
+  tags:
+    - Windstream
+    - Contact Center
+    - Agents
+    - Queues
+    - Telecom
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WINDSTREAM_CCS_TOKEN: WINDSTREAM_CCS_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: windstream-ccs
+      baseUri: https://ccs.windstreamenterprise.com/6/v2/api
+      description: "Windstream CCS API for contact center operations"
+      authentication:
+        type: bearer
+        token: "{{WINDSTREAM_CCS_TOKEN}}"
+      resources:
+        - name: tenants
+          path: /tenants
+          description: "Tenant management"
+          operations:
+            - name: list-tenants
+              method: GET
+              description: "List Tenants"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-tenant
+              method: GET
+              description: "Get Tenant Details"
+              inputParameters:
+                - name: tenantUuid
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tenant UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: list-tenant-acds
+              method: GET
+              description: "List Tenant ACDs"
+              inputParameters:
+                - name: tenantUuid
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tenant UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: list-tenant-extensions
+              method: GET
+              description: "List Tenant Extensions"
+              inputParameters:
+                - name: tenantUuid
+                  in: path
+                  type: string
+                  required: true
+                  description: "Tenant UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: calls
+          path: /calls
+          description: "Call management and monitoring"
+          operations:
+            - name: list-calls
+              method: GET
+              description: "List Calls"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-call
+              method: GET
+              description: "Get Call"
+              inputParameters:
+                - name: callId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Call identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: search-calls
+              method: GET
+              description: "Search Calls"
+              inputParameters:
+                - name: calling_number
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by calling number"
+                - name: called_number
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by called number"
+                - name: from_datetime
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date range"
+                - name: to_datetime
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date range"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: control-call
+              method: POST
+              description: "Control Call"
+              inputParameters:
+                - name: callId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Call identifier"
+              body:
+                type: json
+                data:
+                  action: "{{tools.action}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: agents
+          path: /agent-state
+          description: "Agent state management"
+          operations:
+            - name: update-agent-state
+              method: POST
+              description: "Update Agent State"
+              body:
+                type: json
+                data:
+                  state: "{{tools.state}}"
+                  reason: "{{tools.reason}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-agent-state
+              method: GET
+              description: "Get Agent State"
+              inputParameters:
+                - name: extensionUuid
+                  in: path
+                  type: string
+                  required: true
+                  description: "Extension UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: windstream-ccs-shared-api
+      resources:
+        - path: /v1/calls
+          name: calls
+          operations:
+            - method: GET
+              name: list-calls
+              description: "List Calls"
+              call: "windstream-ccs.list-calls"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: windstream-ccs-shared-mcp
+      transport: http
+      tools:
+        - name: list-calls
+          description: "List contact center calls"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "windstream-ccs.list-calls"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,77 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "windstream": "https://windstreamenterprise.com/vocab#",
+    "telecom": "https://www.itu.int/vocab#",
+
+    "Call": "windstream:Call",
+    "Extension": "windstream:Extension",
+    "AutoAttendant": "windstream:AutoAttendant",
+    "Tenant": "windstream:Tenant",
+    "Agent": "windstream:Agent",
+    "Queue": "windstream:Queue",
+    "User": "windstream:User",
+    "Role": "windstream:Role",
+
+    "callId": {
+      "@id": "windstream:callId",
+      "@type": "xsd:string"
+    },
+    "callingNumber": {
+      "@id": "windstream:callingNumber",
+      "@type": "xsd:string"
+    },
+    "calledNumber": {
+      "@id": "windstream:calledNumber",
+      "@type": "xsd:string"
+    },
+    "callState": {
+      "@id": "windstream:callState",
+      "@type": "xsd:string"
+    },
+    "callDuration": {
+      "@id": "windstream:callDuration",
+      "@type": "xsd:integer"
+    },
+    "extensionNumber": {
+      "@id": "windstream:extensionNumber",
+      "@type": "xsd:string"
+    },
+    "tenantId": {
+      "@id": "windstream:tenantId",
+      "@type": "xsd:string"
+    },
+    "agentState": {
+      "@id": "windstream:agentState",
+      "@type": "xsd:string"
+    },
+    "queueLength": {
+      "@id": "windstream:queueLength",
+      "@type": "xsd:integer"
+    },
+    "agentsAvailable": {
+      "@id": "windstream:agentsAvailable",
+      "@type": "xsd:integer"
+    },
+    "menuOption": {
+      "@id": "windstream:menuOption",
+      "@type": "@id"
+    },
+    "dtmfDigit": {
+      "@id": "windstream:dtmfDigit",
+      "@type": "xsd:string"
+    },
+    "greeting": {
+      "@id": "windstream:greeting",
+      "@type": "xsd:string"
+    },
+    "Organization": "schema:Organization",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "telephone": "schema:telephone",
+    "email": "schema:email"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "operation": "make-outbound-call",
+  "method": "POST",
+  "path": "/calls/outbound",
+  "summary": "Make Outbound Call",
+  "request": {
+    "from": "1001",
+    "to": "+15555550123",
+    "caller_id": "+18005550100"
+  },
+  "response": {
+    "id": "call-abc123def456",
+    "state": "alerting",
+    "caller": "1001",
+    "callee": "+15555550123",
+    "direction": "outbound",
+    "duration": 0,
+    "startedAt": "2026-05-03T14:30:00Z"
+  }
+}

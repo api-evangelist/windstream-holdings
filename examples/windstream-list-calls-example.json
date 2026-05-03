@@ -1,0 +1,27 @@
+{
+  "operation": "list-calls",
+  "method": "GET",
+  "path": "/calls",
+  "summary": "List Calls",
+  "request": {},
+  "response": [
+    {
+      "id": "call-abc123def456",
+      "calling_number": "1001",
+      "called_number": "+15555550123",
+      "state": "connected",
+      "tenant_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "started_at": "2026-05-03T14:30:00Z",
+      "duration": 120
+    },
+    {
+      "id": "call-xyz789uvw012",
+      "calling_number": "+15555550200",
+      "called_number": "1002",
+      "state": "queued",
+      "tenant_uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "started_at": "2026-05-03T14:31:00Z",
+      "duration": 60
+    }
+  ]
+}

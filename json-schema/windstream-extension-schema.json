@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/json-schema/windstream-extension-schema.json",
+  "title": "Extension",
+  "description": "A user extension in the Windstream phone system",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Extension identifier"
+    },
+    "number": {
+      "type": "string",
+      "description": "Extension number"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the extension"
+    },
+    "tenant": {
+      "type": "string",
+      "description": "Tenant ID this extension belongs to"
+    },
+    "type": {
+      "type": "string",
+      "description": "Extension type",
+      "enum": ["user", "auto_attendant", "hunt_group", "voicemail", "conference"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Extension status",
+      "enum": ["active", "inactive", "suspended"]
+    }
+  },
+  "required": ["id", "number"]
+}

@@ -1,0 +1,100 @@
+extends: [[spectral:oas, recommended]]
+
+rules:
+  # Windstream APIs use UUID path parameters for tenant/extension operations
+  windstream-uuid-path-params:
+    description: Tenant and extension path parameters should use UUID format
+    message: "Path parameter '{{value}}' for tenant/extension should be a UUID"
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.in=='path')]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  # All operations must have operationIds
+  windstream-operation-id-required:
+    description: All operations must have an operationId
+    message: "Operation is missing an operationId"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: operationId
+      function: truthy
+
+  # OperationIds use camelCase
+  windstream-operation-id-camel-case:
+    description: OperationIds should use camelCase
+    message: "OperationId '{{value}}' should use camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  # Operations must have tags
+  windstream-operation-tags-required:
+    description: All operations must have at least one tag
+    message: "Operation is missing tags"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: tags
+      function: truthy
+
+  # Summaries must be present and use Title Case
+  windstream-summary-required:
+    description: All operations must have a summary
+    message: "Operation is missing a summary"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: summary
+      function: truthy
+
+  # GET operations should not have request bodies
+  windstream-no-get-request-body:
+    description: GET operations should not have request bodies
+    message: "GET operation should not have a requestBody"
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: requestBody
+      function: falsy
+
+  # Responses must include success codes
+  windstream-success-response-required:
+    description: Operations must define at least one response
+    message: "Operation has no responses defined"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          minProperties: 1
+
+  # Schema properties should have descriptions
+  windstream-schema-property-descriptions:
+    description: Schema properties should have descriptions
+    message: "Schema property is missing a description"
+    severity: info
+    given: "$.components.schemas[*].properties[*]"
+    then:
+      field: description
+      function: truthy
+
+  # HAL responses should use application/hal+json content type
+  windstream-hal-content-type:
+    description: HAL responses should use application/hal+json content type
+    message: "HAL response should declare application/hal+json content type"
+    severity: info
+    given: "$.paths[*][*].responses[*].content"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object

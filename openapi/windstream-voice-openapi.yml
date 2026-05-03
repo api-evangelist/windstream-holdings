@@ -1,0 +1,733 @@
+openapi: "3.0.3"
+info:
+  title: Windstream Enterprise Voice API
+  description: >-
+    The Windstream Enterprise Voice API (silhouette) is a REST-based web service with
+    WebSocket support for real-time events. It enables developers to make and receive
+    calls, manage auto-attendants, control call routing, and configure UC (Unified
+    Communications) settings for OfficeSuite UC deployments. The API accepts and
+    delivers content in JSON format and follows HAL (Hypertext Application Language)
+    specifications for resource linking.
+  version: "1.0.0"
+  contact:
+    name: Windstream Enterprise Developer Support
+    url: https://api.solutions.uniti.com/
+  termsOfService: https://www.windstreamenterprise.com/legal/
+servers:
+  - url: https://{webadmin}/api
+    description: Voice API server
+    variables:
+      webadmin:
+        default: webadmin.windstreamenterprise.com
+        description: WebAdmin server hostname
+
+security:
+  - basicAuth: []
+
+tags:
+  - name: calls
+    description: Call control and management operations
+  - name: extensions
+    description: Extension management and configuration
+  - name: users
+    description: User account management
+  - name: tenants
+    description: Tenant administration
+  - name: auto-attendants
+    description: Auto-attendant configuration
+  - name: system
+    description: System-level operations
+
+paths:
+  /:
+    get:
+      operationId: getApiEntryPoint
+      summary: Get API Entry Point
+      description: Returns the HAL resource entry point with links to available API resources.
+      tags:
+        - system
+      responses:
+        "200":
+          description: HAL entry point with resource links
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/HalResource"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /calls:
+    get:
+      operationId: listActiveCalls
+      summary: List Active Calls
+      description: Retrieves a list of currently active calls in the system.
+      tags:
+        - calls
+      parameters:
+        - name: extension
+          in: query
+          description: Filter calls by extension number
+          required: false
+          schema:
+            type: string
+        - name: tenant
+          in: query
+          description: Filter calls by tenant ID
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of active calls
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Call"
+        "401":
+          description: Unauthorized
+
+  /calls/{callId}:
+    get:
+      operationId: getCall
+      summary: Get Call Details
+      description: Retrieves details of a specific active call by its ID.
+      tags:
+        - calls
+      parameters:
+        - name: callId
+          in: path
+          required: true
+          description: Unique call identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Call details
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Call"
+        "404":
+          description: Call not found
+
+    post:
+      operationId: controlCall
+      summary: Control Call
+      description: >-
+        Executes a control action on an active call. Supported actions include
+        transfer, hold, conference, record, and terminate.
+      tags:
+        - calls
+      parameters:
+        - name: callId
+          in: path
+          required: true
+          description: Unique call identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CallControlRequest"
+      responses:
+        "200":
+          description: Call control action executed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CallControlResponse"
+        "400":
+          description: Invalid action
+        "404":
+          description: Call not found
+
+    delete:
+      operationId: terminateCall
+      summary: Terminate Call
+      description: Terminates an active call.
+      tags:
+        - calls
+      parameters:
+        - name: callId
+          in: path
+          required: true
+          description: Unique call identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Call terminated successfully
+        "404":
+          description: Call not found
+
+  /calls/outbound:
+    post:
+      operationId: makeOutboundCall
+      summary: Make Outbound Call
+      description: Initiates an outbound call from a specified extension to a destination number.
+      tags:
+        - calls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutboundCallRequest"
+      responses:
+        "201":
+          description: Outbound call initiated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Call"
+        "400":
+          description: Invalid request
+        "403":
+          description: Forbidden
+
+  /extensions:
+    get:
+      operationId: listExtensions
+      summary: List Extensions
+      description: Returns a list of all extensions in the tenant.
+      tags:
+        - extensions
+      parameters:
+        - name: tenant
+          in: query
+          description: Tenant ID to filter extensions
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of results per page
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of extensions
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Extension"
+
+  /extensions/{extensionId}:
+    get:
+      operationId: getExtension
+      summary: Get Extension Details
+      description: Retrieves details of a specific extension.
+      tags:
+        - extensions
+      parameters:
+        - name: extensionId
+          in: path
+          required: true
+          description: Extension identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Extension details
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/Extension"
+        "404":
+          description: Extension not found
+
+    put:
+      operationId: updateExtension
+      summary: Update Extension
+      description: Updates the configuration of an existing extension.
+      tags:
+        - extensions
+      parameters:
+        - name: extensionId
+          in: path
+          required: true
+          description: Extension identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtensionUpdate"
+      responses:
+        "200":
+          description: Extension updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Extension"
+
+  /auto-attendants:
+    get:
+      operationId: listAutoAttendants
+      summary: List Auto-attendants
+      description: Returns a list of all auto-attendants configured in the tenant.
+      tags:
+        - auto-attendants
+      responses:
+        "200":
+          description: List of auto-attendants
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AutoAttendant"
+
+    post:
+      operationId: createAutoAttendant
+      summary: Create Auto-attendant
+      description: Creates a new auto-attendant with defined menu options and routing rules.
+      tags:
+        - auto-attendants
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AutoAttendantCreate"
+      responses:
+        "201":
+          description: Auto-attendant created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutoAttendant"
+
+  /auto-attendants/{attendantId}:
+    get:
+      operationId: getAutoAttendant
+      summary: Get Auto-attendant
+      description: Retrieves configuration details of a specific auto-attendant.
+      tags:
+        - auto-attendants
+      parameters:
+        - name: attendantId
+          in: path
+          required: true
+          description: Auto-attendant identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Auto-attendant details
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/AutoAttendant"
+
+    put:
+      operationId: updateAutoAttendant
+      summary: Update Auto-attendant
+      description: Updates the configuration of an existing auto-attendant.
+      tags:
+        - auto-attendants
+      parameters:
+        - name: attendantId
+          in: path
+          required: true
+          description: Auto-attendant identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AutoAttendantCreate"
+      responses:
+        "200":
+          description: Auto-attendant updated
+
+    delete:
+      operationId: deleteAutoAttendant
+      summary: Delete Auto-attendant
+      description: Removes an auto-attendant configuration.
+      tags:
+        - auto-attendants
+      parameters:
+        - name: attendantId
+          in: path
+          required: true
+          description: Auto-attendant identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Auto-attendant deleted
+
+  /users:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Returns a list of all users configured in the system.
+      tags:
+        - users
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+    post:
+      operationId: createUser
+      summary: Create User
+      description: Creates a new user account.
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreate"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /users/{userId}:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Retrieves details of a specific user.
+      tags:
+        - users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User details
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+    put:
+      operationId: updateUser
+      summary: Update User
+      description: Updates an existing user's configuration.
+      tags:
+        - users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreate"
+      responses:
+        "200":
+          description: User updated
+
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      description: Removes a user account.
+      tags:
+        - users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User deleted
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Authentication using extension@tenantId credentials.
+        Username formats: ext@tenantId, ext@tenantId.ID, ext@tenantDID.DID, ext@tenantURI.URI
+
+  schemas:
+    HalResource:
+      type: object
+      description: "HAL (Hypertext Application Language) resource with embedded links"
+      properties:
+        _links:
+          type: object
+          description: "HAL links to related resources"
+          additionalProperties:
+            $ref: "#/components/schemas/HalLink"
+
+    HalLink:
+      type: object
+      description: "HAL link object"
+      properties:
+        href:
+          type: string
+          description: "URL of the linked resource"
+        title:
+          type: string
+          description: "Human-readable title of the link"
+
+    Call:
+      type: object
+      description: "An active or completed phone call"
+      properties:
+        id:
+          type: string
+          description: "Unique call identifier"
+        state:
+          type: string
+          description: "Current call state"
+          enum: [alerting, connected, held, transferring]
+        caller:
+          type: string
+          description: "Calling party extension or number"
+        callee:
+          type: string
+          description: "Called party extension or number"
+        direction:
+          type: string
+          description: "Call direction"
+          enum: [inbound, outbound]
+        duration:
+          type: integer
+          description: "Call duration in seconds"
+        startedAt:
+          type: string
+          format: date-time
+          description: "Call start timestamp"
+        _links:
+          type: object
+          description: "HAL links for call actions"
+
+    CallControlRequest:
+      type: object
+      description: "Request body for call control actions"
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          description: "Call control action to execute"
+          enum: [transfer, hold, unhold, conference, record, stop_record, terminate]
+        destination:
+          type: string
+          description: "Transfer destination (required for transfer action)"
+
+    CallControlResponse:
+      type: object
+      description: "Response from a call control action"
+      properties:
+        success:
+          type: boolean
+          description: "Whether the action was successful"
+        message:
+          type: string
+          description: "Result message"
+
+    OutboundCallRequest:
+      type: object
+      description: "Request to initiate an outbound call"
+      required:
+        - from
+        - to
+      properties:
+        from:
+          type: string
+          description: "Source extension number"
+        to:
+          type: string
+          description: "Destination phone number or extension"
+        caller_id:
+          type: string
+          description: "Caller ID to present to the called party"
+
+    Extension:
+      type: object
+      description: "A user extension in the system"
+      properties:
+        id:
+          type: string
+          description: "Extension identifier"
+        number:
+          type: string
+          description: "Extension number"
+        name:
+          type: string
+          description: "Display name for the extension"
+        tenant:
+          type: string
+          description: "Tenant ID this extension belongs to"
+        type:
+          type: string
+          description: "Extension type"
+          enum: [user, auto_attendant, hunt_group, voicemail, conference]
+        status:
+          type: string
+          description: "Extension status"
+          enum: [active, inactive, suspended]
+
+    ExtensionUpdate:
+      type: object
+      description: "Extension update request body"
+      properties:
+        name:
+          type: string
+          description: "New display name"
+        forward_to:
+          type: string
+          description: "Call forwarding destination"
+        do_not_disturb:
+          type: boolean
+          description: "Enable/disable do not disturb"
+
+    AutoAttendant:
+      type: object
+      description: "An auto-attendant (IVR) configuration"
+      properties:
+        id:
+          type: string
+          description: "Auto-attendant identifier"
+        name:
+          type: string
+          description: "Display name"
+        greeting:
+          type: string
+          description: "Greeting message or audio file path"
+        menu_options:
+          type: array
+          description: "DTMF menu options"
+          items:
+            $ref: "#/components/schemas/MenuOption"
+
+    AutoAttendantCreate:
+      type: object
+      description: "Request body for creating or updating an auto-attendant"
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: "Display name"
+        greeting:
+          type: string
+          description: "Greeting message"
+        menu_options:
+          type: array
+          items:
+            $ref: "#/components/schemas/MenuOption"
+
+    MenuOption:
+      type: object
+      description: "A single DTMF menu option"
+      properties:
+        digit:
+          type: string
+          description: "DTMF digit (0-9, *, #)"
+        action:
+          type: string
+          description: "Action to take when digit is pressed"
+          enum: [transfer, voicemail, repeat_menu, disconnect]
+        destination:
+          type: string
+          description: "Transfer destination if action is transfer"
+
+    User:
+      type: object
+      description: "A user account"
+      properties:
+        id:
+          type: string
+          description: "User identifier"
+        username:
+          type: string
+          description: "Login username"
+        email:
+          type: string
+          description: "Email address"
+        extension:
+          type: string
+          description: "Assigned extension number"
+        role:
+          type: string
+          description: "User role"
+          enum: [admin, user, read_only]
+        tenant:
+          type: string
+          description: "Tenant ID"
+
+    UserCreate:
+      type: object
+      description: "Request body for creating or updating a user"
+      required:
+        - username
+        - email
+      properties:
+        username:
+          type: string
+          description: "Login username"
+        email:
+          type: string
+          description: "Email address"
+        extension:
+          type: string
+          description: "Extension to assign"
+        role:
+          type: string
+          description: "User role"
+          enum: [admin, user, read_only]
+
+    Error:
+      type: object
+      description: "Error response"
+      properties:
+        code:
+          type: integer
+          description: "HTTP status code"
+        message:
+          type: string
+          description: "Error message"
+        details:
+          type: string
+          description: "Additional error details"

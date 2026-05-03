@@ -1,0 +1,173 @@
+vocabulary:
+  name: Windstream Holdings Vocabulary
+  description: >-
+    Domain vocabulary for Windstream Holdings covering unified communications,
+    contact center operations, voice API, broadband networking, and telecom
+    managed services. Includes terms for OfficeSuite UC, CCS (Contact Center
+    Services), SD-WAN, and Kinetic broadband.
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - Telecom
+    - Unified Communications
+    - Contact Center
+    - Voice
+    - Broadband
+    - SD-WAN
+    - Managed Services
+
+terms:
+  - term: OfficeSuite UC
+    definition: >-
+      Windstream's Unified Communications as a Service (UCaaS) platform offering
+      voice, video, messaging, and collaboration tools for businesses. OfficeSuite UC
+      is the primary product delivered through the Voice API (silhouette platform).
+    category: Product
+    tags:
+      - UCaaS
+      - Voice
+      - Collaboration
+
+  - term: CCS (Contact Center Services)
+    definition: >-
+      Windstream Enterprise's Contact Center as a Service (CCaaS) platform providing
+      inbound/outbound call routing, agent management, ACD queues, presence management,
+      and multi-channel communications including voice, web chat, and SMS.
+    category: Product
+    tags:
+      - Contact Center
+      - CCaaS
+      - Agents
+
+  - term: Kinetic
+    definition: >-
+      Windstream's consumer and small business broadband brand offering fiber-to-the-
+      premise internet service, with over 2.1 million passings in rural and suburban
+      markets across 18 U.S. states as of 2026.
+    category: Product
+    tags:
+      - Broadband
+      - Fiber
+      - Consumer
+
+  - term: HAL (Hypertext Application Language)
+    definition: >-
+      A hypermedia format used by the Windstream Voice API for resource representations.
+      HAL responses include _links objects that describe available actions and related
+      resources, enabling API discoverability.
+    category: API Standard
+    tags:
+      - API
+      - HAL
+      - REST
+
+  - term: silhouette
+    definition: >-
+      The underlying platform name for Windstream's Voice API, providing REST-based
+      call control, extension management, and UC configuration services.
+    category: Platform
+    tags:
+      - Platform
+      - Voice
+      - API
+
+  - term: ACD (Automatic Call Distributor)
+    definition: >-
+      A contact center system that automatically routes incoming calls to available
+      agents based on configured rules. In the CCS API, ACDs are represented as
+      queues with metrics for queue length and agent availability.
+    category: Contact Center
+    tags:
+      - Contact Center
+      - Routing
+      - Queues
+
+  - term: Auto-attendant
+    definition: >-
+      An automated voice response system that answers calls and routes them based
+      on DTMF keypad input from callers. Auto-attendants in the Voice API can have
+      multi-level menus with transfer, voicemail, and disconnect actions.
+    category: Voice
+    tags:
+      - Voice
+      - IVR
+      - Routing
+
+  - term: Extension
+    definition: >-
+      A unique telephone number assigned within a business phone system (PBX).
+      Windstream extensions can be of type user, auto_attendant, hunt_group,
+      voicemail, or conference, and are identified by extension number within a tenant.
+    category: Voice
+    tags:
+      - Voice
+      - Extensions
+      - PBX
+
+  - term: Tenant
+    definition: >-
+      An isolated organizational unit in the Windstream UC or CCS platform,
+      typically representing a business customer. Tenants have their own extensions,
+      users, queues, and configuration settings.
+    category: Platform
+    tags:
+      - Tenant
+      - Multi-tenant
+      - Platform
+
+  - term: Agent State
+    definition: >-
+      The current presence/availability status of a contact center agent. Common
+      states include Available, Busy, On Break, and custom states defined per tenant.
+      Agent state determines whether the agent receives new inbound calls.
+    category: Contact Center
+    tags:
+      - Agents
+      - Presence
+      - Contact Center
+
+  - term: SD-WAN
+    definition: >-
+      Software-Defined Wide Area Network — a managed networking solution offered
+      by Windstream Enterprise for enterprise customers, providing centralized
+      network management, traffic optimization, and security policy enforcement
+      across distributed locations.
+    category: Network
+    tags:
+      - SD-WAN
+      - Network
+      - Managed Services
+
+  - term: UCaaS
+    definition: >-
+      Unified Communications as a Service — a cloud-delivered communications
+      platform that integrates voice, video, messaging, presence, and collaboration
+      tools. Windstream's OfficeSuite UC is its UCaaS offering.
+    category: Industry
+    tags:
+      - UCaaS
+      - Cloud
+      - Communications
+
+  - term: DTMF
+    definition: >-
+      Dual-Tone Multi-Frequency — the telephone signaling system using audio
+      frequencies for keypad input (0-9, *, #). Used in auto-attendant menu
+      navigation in the Windstream Voice API.
+    category: Technical
+    tags:
+      - DTMF
+      - Voice
+      - IVR
+
+  - term: WebSocket
+    definition: >-
+      A full-duplex communication protocol used by both the Windstream Voice API
+      and CCS API for real-time event streaming. WebSocket connections require
+      a token-based connect message and deliver call events and agent state changes.
+    category: Technical
+    tags:
+      - WebSocket
+      - Real-time
+      - Events

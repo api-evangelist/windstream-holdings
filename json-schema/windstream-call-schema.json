@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/json-schema/windstream-call-schema.json",
+  "title": "Call",
+  "description": "A phone call in the Windstream communications system",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique call identifier"
+    },
+    "state": {
+      "type": "string",
+      "description": "Current call state",
+      "enum": ["alerting", "connected", "held", "queued", "completed"]
+    },
+    "caller": {
+      "type": "string",
+      "description": "Calling party extension or number"
+    },
+    "callee": {
+      "type": "string",
+      "description": "Called party extension or number"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Call direction",
+      "enum": ["inbound", "outbound"]
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Call duration in seconds"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Call start timestamp"
+    },
+    "tenant_uuid": {
+      "type": "string",
+      "description": "Tenant UUID"
+    }
+  },
+  "required": ["id", "state"]
+}
