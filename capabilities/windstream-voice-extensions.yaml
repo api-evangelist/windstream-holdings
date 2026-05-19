@@ -1,0 +1,176 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windstream Enterprise Voice API — extensions
+  description: 'Windstream Enterprise Voice API — extensions. 3 operations. Lead operation: List Extensions. Self-contained
+    Naftiko capability covering one Windstream Holdings business surface.'
+  tags:
+  - Windstream Holdings
+  - extensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDSTREAM_HOLDINGS_API_KEY: WINDSTREAM_HOLDINGS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windstream-voice-extensions
+    baseUri: https://{webadmin}/api
+    description: Windstream Enterprise Voice API — extensions business capability. Self-contained, no shared references.
+    resources:
+    - name: extensions
+      path: /extensions
+      operations:
+      - name: listextensions
+        method: GET
+        description: List Extensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenant
+          in: query
+          type: string
+          description: Tenant ID to filter extensions
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of results per page
+    - name: extensions-extensionId
+      path: /extensions/{extensionId}
+      operations:
+      - name: getextension
+        method: GET
+        description: Get Extension Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionId
+          in: path
+          type: string
+          description: Extension identifier
+          required: true
+      - name: updateextension
+        method: PUT
+        description: Update Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionId
+          in: path
+          type: string
+          description: Extension identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.WINDSTREAM_HOLDINGS_USER}}'
+      password: '{{env.WINDSTREAM_HOLDINGS_PASS}}'
+  exposes:
+  - type: rest
+    namespace: windstream-voice-extensions-rest
+    port: 8080
+    description: REST adapter for Windstream Enterprise Voice API — extensions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/extensions
+      name: extensions
+      description: REST surface for extensions.
+      operations:
+      - method: GET
+        name: listextensions
+        description: List Extensions
+        call: windstream-voice-extensions.listextensions
+        with:
+          tenant: rest.tenant
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionid}
+      name: extensions-extensionid
+      description: REST surface for extensions-extensionId.
+      operations:
+      - method: GET
+        name: getextension
+        description: Get Extension Details
+        call: windstream-voice-extensions.getextension
+        with:
+          extensionId: rest.extensionId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateextension
+        description: Update Extension
+        call: windstream-voice-extensions.updateextension
+        with:
+          extensionId: rest.extensionId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windstream-voice-extensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windstream Enterprise Voice API — extensions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-extensions
+      description: List Extensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-voice-extensions.listextensions
+      with:
+        tenant: tools.tenant
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-extension-details
+      description: Get Extension Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-voice-extensions.getextension
+      with:
+        extensionId: tools.extensionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-extension
+      description: Update Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: windstream-voice-extensions.updateextension
+      with:
+        extensionId: tools.extensionId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

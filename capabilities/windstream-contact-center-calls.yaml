@@ -1,0 +1,220 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windstream Enterprise Contact Center Services API — calls
+  description: 'Windstream Enterprise Contact Center Services API — calls. 4 operations. Lead operation: List Calls. Self-contained
+    Naftiko capability covering one Windstream Holdings business surface.'
+  tags:
+  - Windstream Holdings
+  - calls
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDSTREAM_HOLDINGS_API_KEY: WINDSTREAM_HOLDINGS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windstream-contact-center-calls
+    baseUri: https://{ccs_domain}/6/v2/api
+    description: Windstream Enterprise Contact Center Services API — calls business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: calls
+      path: /calls
+      operations:
+      - name: listcalls
+        method: GET
+        description: List Calls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: calls-filter
+      path: /calls/filter
+      operations:
+      - name: searchcalls
+        method: GET
+        description: Search Calls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: calling_number
+          in: query
+          type: string
+          description: Filter by calling party number
+        - name: called_number
+          in: query
+          type: string
+          description: Filter by called party number
+        - name: from_datetime
+          in: query
+          type: string
+          description: Start of date range filter (ISO 8601)
+        - name: to_datetime
+          in: query
+          type: string
+          description: End of date range filter (ISO 8601)
+        - name: time_z
+          in: query
+          type: string
+          description: Timezone for date range (e.g., America/New_York)
+    - name: calls-callId
+      path: /calls/{callId}
+      operations:
+      - name: getcall
+        method: GET
+        description: Get Call
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: callId
+          in: path
+          type: string
+          description: Call identifier
+          required: true
+      - name: controlcall
+        method: POST
+        description: Control Call
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: callId
+          in: path
+          type: string
+          description: Call identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDSTREAM_HOLDINGS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windstream-contact-center-calls-rest
+    port: 8080
+    description: REST adapter for Windstream Enterprise Contact Center Services API — calls. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/calls
+      name: calls
+      description: REST surface for calls.
+      operations:
+      - method: GET
+        name: listcalls
+        description: List Calls
+        call: windstream-contact-center-calls.listcalls
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/calls/filter
+      name: calls-filter
+      description: REST surface for calls-filter.
+      operations:
+      - method: GET
+        name: searchcalls
+        description: Search Calls
+        call: windstream-contact-center-calls.searchcalls
+        with:
+          calling_number: rest.calling_number
+          called_number: rest.called_number
+          from_datetime: rest.from_datetime
+          to_datetime: rest.to_datetime
+          time_z: rest.time_z
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/calls/{callid}
+      name: calls-callid
+      description: REST surface for calls-callId.
+      operations:
+      - method: GET
+        name: getcall
+        description: Get Call
+        call: windstream-contact-center-calls.getcall
+        with:
+          callId: rest.callId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: controlcall
+        description: Control Call
+        call: windstream-contact-center-calls.controlcall
+        with:
+          callId: rest.callId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windstream-contact-center-calls-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windstream Enterprise Contact Center Services API — calls. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-calls
+      description: List Calls
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-calls.listcalls
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-calls
+      description: Search Calls
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-calls.searchcalls
+      with:
+        calling_number: tools.calling_number
+        called_number: tools.called_number
+        from_datetime: tools.from_datetime
+        to_datetime: tools.to_datetime
+        time_z: tools.time_z
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-call
+      description: Get Call
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-calls.getcall
+      with:
+        callId: tools.callId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: control-call
+      description: Control Call
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windstream-contact-center-calls.controlcall
+      with:
+        callId: tools.callId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

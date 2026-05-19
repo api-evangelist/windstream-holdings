@@ -1,0 +1,179 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windstream Enterprise Contact Center Services API — extensions
+  description: 'Windstream Enterprise Contact Center Services API — extensions. 3 operations. Lead operation: Get Agent State.
+    Self-contained Naftiko capability covering one Windstream Holdings business surface.'
+  tags:
+  - Windstream Holdings
+  - extensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDSTREAM_HOLDINGS_API_KEY: WINDSTREAM_HOLDINGS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windstream-contact-center-extensions
+    baseUri: https://{ccs_domain}/6/v2/api
+    description: Windstream Enterprise Contact Center Services API — extensions business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: extensions-extensionUuid-agent-state
+      path: /extensions/{extensionUuid}/agent-state
+      operations:
+      - name: getagentstate
+        method: GET
+        description: Get Agent State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionUuid
+          in: path
+          type: string
+          description: Extension UUID
+          required: true
+    - name: tenants-tenantUuid-extensions
+      path: /tenants/{tenantUuid}/extensions
+      operations:
+      - name: listtenantextensions
+        method: GET
+        description: List Tenant Extensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+    - name: tenants-tenantUuid-extensions-extensionUuid
+      path: /tenants/{tenantUuid}/extensions/{extensionUuid}
+      operations:
+      - name: updatetenantextension
+        method: PUT
+        description: Update Tenant Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+        - name: extensionUuid
+          in: path
+          type: string
+          description: Extension UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDSTREAM_HOLDINGS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windstream-contact-center-extensions-rest
+    port: 8080
+    description: REST adapter for Windstream Enterprise Contact Center Services API — extensions. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/extensions/{extensionuuid}/agent-state
+      name: extensions-extensionuuid-agent-state
+      description: REST surface for extensions-extensionUuid-agent-state.
+      operations:
+      - method: GET
+        name: getagentstate
+        description: Get Agent State
+        call: windstream-contact-center-extensions.getagentstate
+        with:
+          extensionUuid: rest.extensionUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/extensions
+      name: tenants-tenantuuid-extensions
+      description: REST surface for tenants-tenantUuid-extensions.
+      operations:
+      - method: GET
+        name: listtenantextensions
+        description: List Tenant Extensions
+        call: windstream-contact-center-extensions.listtenantextensions
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/extensions/{extensionuuid}
+      name: tenants-tenantuuid-extensions-extensionuuid
+      description: REST surface for tenants-tenantUuid-extensions-extensionUuid.
+      operations:
+      - method: PUT
+        name: updatetenantextension
+        description: Update Tenant Extension
+        call: windstream-contact-center-extensions.updatetenantextension
+        with:
+          tenantUuid: rest.tenantUuid
+          extensionUuid: rest.extensionUuid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windstream-contact-center-extensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windstream Enterprise Contact Center Services API — extensions. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-agent-state
+      description: Get Agent State
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-extensions.getagentstate
+      with:
+        extensionUuid: tools.extensionUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tenant-extensions
+      description: List Tenant Extensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-extensions.listtenantextensions
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-tenant-extension
+      description: Update Tenant Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-extensions.updatetenantextension
+      with:
+        tenantUuid: tools.tenantUuid
+        extensionUuid: tools.extensionUuid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

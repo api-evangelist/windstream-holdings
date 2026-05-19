@@ -1,0 +1,165 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windstream Enterprise Contact Center Services API — agents
+  description: 'Windstream Enterprise Contact Center Services API — agents. 3 operations. Lead operation: Update Agent State.
+    Self-contained Naftiko capability covering one Windstream Holdings business surface.'
+  tags:
+  - Windstream Holdings
+  - agents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDSTREAM_HOLDINGS_API_KEY: WINDSTREAM_HOLDINGS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windstream-contact-center-agents
+    baseUri: https://{ccs_domain}/6/v2/api
+    description: Windstream Enterprise Contact Center Services API — agents business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: agent-state
+      path: /agent-state
+      operations:
+      - name: updateagentstate
+        method: POST
+        description: Update Agent State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: extensions-extensionUuid-agent-state
+      path: /extensions/{extensionUuid}/agent-state
+      operations:
+      - name: getagentstate
+        method: GET
+        description: Get Agent State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionUuid
+          in: path
+          type: string
+          description: Extension UUID
+          required: true
+    - name: tenants-tenantUuid-presence-options
+      path: /tenants/{tenantUuid}/presence-options
+      operations:
+      - name: listpresenceoptions
+        method: GET
+        description: List Presence Options
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDSTREAM_HOLDINGS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windstream-contact-center-agents-rest
+    port: 8080
+    description: REST adapter for Windstream Enterprise Contact Center Services API — agents. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/agent-state
+      name: agent-state
+      description: REST surface for agent-state.
+      operations:
+      - method: POST
+        name: updateagentstate
+        description: Update Agent State
+        call: windstream-contact-center-agents.updateagentstate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{extensionuuid}/agent-state
+      name: extensions-extensionuuid-agent-state
+      description: REST surface for extensions-extensionUuid-agent-state.
+      operations:
+      - method: GET
+        name: getagentstate
+        description: Get Agent State
+        call: windstream-contact-center-agents.getagentstate
+        with:
+          extensionUuid: rest.extensionUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/presence-options
+      name: tenants-tenantuuid-presence-options
+      description: REST surface for tenants-tenantUuid-presence-options.
+      operations:
+      - method: GET
+        name: listpresenceoptions
+        description: List Presence Options
+        call: windstream-contact-center-agents.listpresenceoptions
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windstream-contact-center-agents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windstream Enterprise Contact Center Services API — agents. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: update-agent-state
+      description: Update Agent State
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windstream-contact-center-agents.updateagentstate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-state
+      description: Get Agent State
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-agents.getagentstate
+      with:
+        extensionUuid: tools.extensionUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-presence-options
+      description: List Presence Options
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-agents.listpresenceoptions
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.

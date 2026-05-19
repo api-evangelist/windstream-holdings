@@ -1,0 +1,498 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windstream Enterprise Contact Center Services API — tenants
+  description: 'Windstream Enterprise Contact Center Services API — tenants. 11 operations. Lead operation: List Tenants.
+    Self-contained Naftiko capability covering one Windstream Holdings business surface.'
+  tags:
+  - Windstream Holdings
+  - tenants
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDSTREAM_HOLDINGS_API_KEY: WINDSTREAM_HOLDINGS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windstream-contact-center-tenants
+    baseUri: https://{ccs_domain}/6/v2/api
+    description: Windstream Enterprise Contact Center Services API — tenants business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: tenants
+      path: /tenants
+      operations:
+      - name: listtenants
+        method: GET
+        description: List Tenants
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tenants-tenantUuid
+      path: /tenants/{tenantUuid}
+      operations:
+      - name: gettenant
+        method: GET
+        description: Get Tenant Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+      - name: updatetenantproducts
+        method: POST
+        description: Update Tenant Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: updatetenantlimits
+        method: PUT
+        description: Update Tenant Limits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tenants-tenantUuid-acds
+      path: /tenants/{tenantUuid}/acds
+      operations:
+      - name: listtenantacds
+        method: GET
+        description: List Tenant ACDs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+    - name: tenants-tenantUuid-extensions
+      path: /tenants/{tenantUuid}/extensions
+      operations:
+      - name: listtenantextensions
+        method: GET
+        description: List Tenant Extensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+    - name: tenants-tenantUuid-extensions-extensionUuid
+      path: /tenants/{tenantUuid}/extensions/{extensionUuid}
+      operations:
+      - name: updatetenantextension
+        method: PUT
+        description: Update Tenant Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+        - name: extensionUuid
+          in: path
+          type: string
+          description: Extension UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tenants-tenantUuid-presence-options
+      path: /tenants/{tenantUuid}/presence-options
+      operations:
+      - name: listpresenceoptions
+        method: GET
+        description: List Presence Options
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+    - name: tenants-tenantUuid-roles
+      path: /tenants/{tenantUuid}/roles
+      operations:
+      - name: listtenantroles
+        method: GET
+        description: List Tenant Roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+    - name: tenants-tenantUuid-text-count
+      path: /tenants/{tenantUuid}/text-count
+      operations:
+      - name: gettextmessagecount
+        method: GET
+        description: Get Text Message Count
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+      - name: resettextmessagecount
+        method: POST
+        description: Reset Text Message Count
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tenantUuid
+          in: path
+          type: string
+          description: Tenant UUID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDSTREAM_HOLDINGS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windstream-contact-center-tenants-rest
+    port: 8080
+    description: REST adapter for Windstream Enterprise Contact Center Services API — tenants. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/tenants
+      name: tenants
+      description: REST surface for tenants.
+      operations:
+      - method: GET
+        name: listtenants
+        description: List Tenants
+        call: windstream-contact-center-tenants.listtenants
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}
+      name: tenants-tenantuuid
+      description: REST surface for tenants-tenantUuid.
+      operations:
+      - method: GET
+        name: gettenant
+        description: Get Tenant Details
+        call: windstream-contact-center-tenants.gettenant
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatetenantproducts
+        description: Update Tenant Products
+        call: windstream-contact-center-tenants.updatetenantproducts
+        with:
+          tenantUuid: rest.tenantUuid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatetenantlimits
+        description: Update Tenant Limits
+        call: windstream-contact-center-tenants.updatetenantlimits
+        with:
+          tenantUuid: rest.tenantUuid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/acds
+      name: tenants-tenantuuid-acds
+      description: REST surface for tenants-tenantUuid-acds.
+      operations:
+      - method: GET
+        name: listtenantacds
+        description: List Tenant ACDs
+        call: windstream-contact-center-tenants.listtenantacds
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/extensions
+      name: tenants-tenantuuid-extensions
+      description: REST surface for tenants-tenantUuid-extensions.
+      operations:
+      - method: GET
+        name: listtenantextensions
+        description: List Tenant Extensions
+        call: windstream-contact-center-tenants.listtenantextensions
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/extensions/{extensionuuid}
+      name: tenants-tenantuuid-extensions-extensionuuid
+      description: REST surface for tenants-tenantUuid-extensions-extensionUuid.
+      operations:
+      - method: PUT
+        name: updatetenantextension
+        description: Update Tenant Extension
+        call: windstream-contact-center-tenants.updatetenantextension
+        with:
+          tenantUuid: rest.tenantUuid
+          extensionUuid: rest.extensionUuid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/presence-options
+      name: tenants-tenantuuid-presence-options
+      description: REST surface for tenants-tenantUuid-presence-options.
+      operations:
+      - method: GET
+        name: listpresenceoptions
+        description: List Presence Options
+        call: windstream-contact-center-tenants.listpresenceoptions
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/roles
+      name: tenants-tenantuuid-roles
+      description: REST surface for tenants-tenantUuid-roles.
+      operations:
+      - method: GET
+        name: listtenantroles
+        description: List Tenant Roles
+        call: windstream-contact-center-tenants.listtenantroles
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tenants/{tenantuuid}/text-count
+      name: tenants-tenantuuid-text-count
+      description: REST surface for tenants-tenantUuid-text-count.
+      operations:
+      - method: GET
+        name: gettextmessagecount
+        description: Get Text Message Count
+        call: windstream-contact-center-tenants.gettextmessagecount
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: resettextmessagecount
+        description: Reset Text Message Count
+        call: windstream-contact-center-tenants.resettextmessagecount
+        with:
+          tenantUuid: rest.tenantUuid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windstream-contact-center-tenants-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windstream Enterprise Contact Center Services API — tenants. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-tenants
+      description: List Tenants
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.listtenants
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tenant-details
+      description: Get Tenant Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.gettenant
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-tenant-products
+      description: Update Tenant Products
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windstream-contact-center-tenants.updatetenantproducts
+      with:
+        tenantUuid: tools.tenantUuid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-tenant-limits
+      description: Update Tenant Limits
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.updatetenantlimits
+      with:
+        tenantUuid: tools.tenantUuid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tenant-acds
+      description: List Tenant ACDs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.listtenantacds
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tenant-extensions
+      description: List Tenant Extensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.listtenantextensions
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-tenant-extension
+      description: Update Tenant Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.updatetenantextension
+      with:
+        tenantUuid: tools.tenantUuid
+        extensionUuid: tools.extensionUuid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-presence-options
+      description: List Presence Options
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.listpresenceoptions
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tenant-roles
+      description: List Tenant Roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.listtenantroles
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-text-message-count
+      description: Get Text Message Count
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-tenants.gettextmessagecount
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-text-message-count
+      description: Reset Text Message Count
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windstream-contact-center-tenants.resettextmessagecount
+      with:
+        tenantUuid: tools.tenantUuid
+      outputParameters:
+      - type: object
+        mapping: $.

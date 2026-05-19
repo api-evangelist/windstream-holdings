@@ -1,0 +1,225 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windstream Enterprise Voice API — auto-attendants
+  description: 'Windstream Enterprise Voice API — auto-attendants. 5 operations. Lead operation: List Auto-attendants. Self-contained
+    Naftiko capability covering one Windstream Holdings business surface.'
+  tags:
+  - Windstream Holdings
+  - auto-attendants
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDSTREAM_HOLDINGS_API_KEY: WINDSTREAM_HOLDINGS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windstream-voice-auto-attendants
+    baseUri: https://{webadmin}/api
+    description: Windstream Enterprise Voice API — auto-attendants business capability. Self-contained, no shared references.
+    resources:
+    - name: auto-attendants
+      path: /auto-attendants
+      operations:
+      - name: listautoattendants
+        method: GET
+        description: List Auto-attendants
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createautoattendant
+        method: POST
+        description: Create Auto-attendant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: auto-attendants-attendantId
+      path: /auto-attendants/{attendantId}
+      operations:
+      - name: getautoattendant
+        method: GET
+        description: Get Auto-attendant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: attendantId
+          in: path
+          type: string
+          description: Auto-attendant identifier
+          required: true
+      - name: updateautoattendant
+        method: PUT
+        description: Update Auto-attendant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: attendantId
+          in: path
+          type: string
+          description: Auto-attendant identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteautoattendant
+        method: DELETE
+        description: Delete Auto-attendant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: attendantId
+          in: path
+          type: string
+          description: Auto-attendant identifier
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.WINDSTREAM_HOLDINGS_USER}}'
+      password: '{{env.WINDSTREAM_HOLDINGS_PASS}}'
+  exposes:
+  - type: rest
+    namespace: windstream-voice-auto-attendants-rest
+    port: 8080
+    description: REST adapter for Windstream Enterprise Voice API — auto-attendants. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/auto-attendants
+      name: auto-attendants
+      description: REST surface for auto-attendants.
+      operations:
+      - method: GET
+        name: listautoattendants
+        description: List Auto-attendants
+        call: windstream-voice-auto-attendants.listautoattendants
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createautoattendant
+        description: Create Auto-attendant
+        call: windstream-voice-auto-attendants.createautoattendant
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/auto-attendants/{attendantid}
+      name: auto-attendants-attendantid
+      description: REST surface for auto-attendants-attendantId.
+      operations:
+      - method: GET
+        name: getautoattendant
+        description: Get Auto-attendant
+        call: windstream-voice-auto-attendants.getautoattendant
+        with:
+          attendantId: rest.attendantId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateautoattendant
+        description: Update Auto-attendant
+        call: windstream-voice-auto-attendants.updateautoattendant
+        with:
+          attendantId: rest.attendantId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteautoattendant
+        description: Delete Auto-attendant
+        call: windstream-voice-auto-attendants.deleteautoattendant
+        with:
+          attendantId: rest.attendantId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windstream-voice-auto-attendants-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windstream Enterprise Voice API — auto-attendants. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-auto-attendants
+      description: List Auto-attendants
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-voice-auto-attendants.listautoattendants
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-auto-attendant
+      description: Create Auto-attendant
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windstream-voice-auto-attendants.createautoattendant
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-auto-attendant
+      description: Get Auto-attendant
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-voice-auto-attendants.getautoattendant
+      with:
+        attendantId: tools.attendantId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-auto-attendant
+      description: Update Auto-attendant
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: windstream-voice-auto-attendants.updateautoattendant
+      with:
+        attendantId: tools.attendantId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-auto-attendant
+      description: Delete Auto-attendant
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windstream-voice-auto-attendants.deleteautoattendant
+      with:
+        attendantId: tools.attendantId
+      outputParameters:
+      - type: object
+        mapping: $.

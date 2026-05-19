@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windstream Enterprise Contact Center Services API — products
+  description: 'Windstream Enterprise Contact Center Services API — products. 1 operations. Lead operation: List Products.
+    Self-contained Naftiko capability covering one Windstream Holdings business surface.'
+  tags:
+  - Windstream Holdings
+  - products
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDSTREAM_HOLDINGS_API_KEY: WINDSTREAM_HOLDINGS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windstream-contact-center-products
+    baseUri: https://{ccs_domain}/6/v2/api
+    description: Windstream Enterprise Contact Center Services API — products business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: products
+      path: /products/
+      operations:
+      - name: listproducts
+        method: GET
+        description: List Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDSTREAM_HOLDINGS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windstream-contact-center-products-rest
+    port: 8080
+    description: REST adapter for Windstream Enterprise Contact Center Services API — products. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/products
+      name: products
+      description: REST surface for products.
+      operations:
+      - method: GET
+        name: listproducts
+        description: List Products
+        call: windstream-contact-center-products.listproducts
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windstream-contact-center-products-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windstream Enterprise Contact Center Services API — products. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-products
+      description: List Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windstream-contact-center-products.listproducts
+      outputParameters:
+      - type: object
+        mapping: $.
