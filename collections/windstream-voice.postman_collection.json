@@ -1,0 +1,2690 @@
+{
+  "item": [
+    {
+      "id": "04c98e47-69ca-4217-9e24-547877c505b5",
+      "name": "calls",
+      "description": {
+        "content": "Call control and management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e5a3892-ef61-4f4a-938b-c9ea771876ab",
+          "name": "List Active Calls",
+          "request": {
+            "name": "List Active Calls",
+            "description": {
+              "content": "Retrieves a list of currently active calls in the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "extension",
+                  "value": "<string>",
+                  "description": "Filter calls by extension number"
+                },
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>",
+                  "description": "Filter calls by tenant ID"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a18cc38-68f2-42cb-bfa6-c999bf1080ff",
+              "name": "List of active calls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"state\": \"connected\",\n    \"caller\": \"string\",\n    \"callee\": \"string\",\n    \"direction\": \"outbound\",\n    \"duration\": 3730,\n    \"startedAt\": \"1966-02-05T06:29:34.628Z\",\n    \"_links\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"state\": \"alerting\",\n    \"caller\": \"string\",\n    \"callee\": \"string\",\n    \"direction\": \"outbound\",\n    \"duration\": 7771,\n    \"startedAt\": \"1960-09-07T08:28:39.620Z\",\n    \"_links\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5fb274e-7767-4052-94c1-db2cc10d71fb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfebd1fa-bc34-471d-a5ed-16db69c7e794",
+          "name": "Get Call Details",
+          "request": {
+            "name": "Get Call Details",
+            "description": {
+              "content": "Retrieves details of a specific active call by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Unique call identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f58b7294-bde7-4d9b-9afb-3d5d2f53bcc7",
+              "name": "Call details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"state\": \"alerting\",\n  \"caller\": \"string\",\n  \"callee\": \"string\",\n  \"direction\": \"inbound\",\n  \"duration\": 2014,\n  \"startedAt\": \"1987-02-24T16:41:05.467Z\",\n  \"_links\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e501347-e0a1-4eb4-9bb5-1e42a9a5dfdf",
+              "name": "Call not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8462017-2d6e-464b-b9a3-04717cb59d24",
+          "name": "Control Call",
+          "request": {
+            "name": "Control Call",
+            "description": {
+              "content": "Executes a control action on an active call. Supported actions include transfer, hold, conference, record, and terminate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Unique call identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"destination\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8a29164-d6bd-4d54-9260-15d2fecd0335",
+              "name": "Call control action executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"destination\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfb373a8-a246-471c-b3a3-9ac30ab364af",
+              "name": "Invalid action",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"destination\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a73f7ac0-35d7-4b82-a888-540020474587",
+              "name": "Call not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"destination\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0cbc2ec-5d76-49b5-b3aa-ebf896f2b536",
+          "name": "Terminate Call",
+          "request": {
+            "name": "Terminate Call",
+            "description": {
+              "content": "Terminates an active call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Unique call identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e077c1e-33e3-434a-8714-704680b93106",
+              "name": "Call terminated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76f9c906-b6cc-4d08-9283-3feddf0eb5d9",
+              "name": "Call not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25c8a8a2-6153-40c3-becb-4655bb698421",
+          "name": "Make Outbound Call",
+          "request": {
+            "name": "Make Outbound Call",
+            "description": {
+              "content": "Initiates an outbound call from a specified extension to a destination number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                "outbound"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ffa32cd5-c1ec-4e99-a17b-840980304dc0",
+              "name": "Outbound call initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "outbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"state\": \"alerting\",\n  \"caller\": \"string\",\n  \"callee\": \"string\",\n  \"direction\": \"inbound\",\n  \"duration\": 2014,\n  \"startedAt\": \"1987-02-24T16:41:05.467Z\",\n  \"_links\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76b68a80-e2d0-45b5-a522-4c0721e970c9",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "outbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1897fd98-be0c-402b-9fbc-457d1668d8a7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "outbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "502c06e8-23fe-4a34-a4ed-5bf2b66e779f",
+      "name": "extensions",
+      "description": {
+        "content": "Extension management and configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "052b2911-2f29-4cd8-a23b-3636836d35a0",
+          "name": "List Extensions",
+          "request": {
+            "name": "List Extensions",
+            "description": {
+              "content": "Returns a list of all extensions in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>",
+                  "description": "Tenant ID to filter extensions"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Number of results per page"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd142044-9050-4e92-847b-24653b49487b",
+              "name": "List of extensions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"number\": \"string\",\n    \"name\": \"string\",\n    \"tenant\": \"string\",\n    \"type\": \"auto_attendant\",\n    \"status\": \"inactive\"\n  },\n  {\n    \"id\": \"string\",\n    \"number\": \"string\",\n    \"name\": \"string\",\n    \"tenant\": \"string\",\n    \"type\": \"auto_attendant\",\n    \"status\": \"active\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f016f3c8-d405-4cab-ad15-953b1b56585e",
+          "name": "Get Extension Details",
+          "request": {
+            "name": "Get Extension Details",
+            "description": {
+              "content": "Retrieves details of a specific extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) Extension identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "238f9bc0-756c-4b8b-b4e9-0bdea7c6c1b9",
+              "name": "Extension details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) Extension identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"number\": \"string\",\n  \"name\": \"string\",\n  \"tenant\": \"string\",\n  \"type\": \"conference\",\n  \"status\": \"inactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9676ddb4-0d1e-4e03-873f-a72bf20d4a8f",
+              "name": "Extension not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) Extension identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47622c0c-b9d8-434c-95cf-3ca6080b4a89",
+          "name": "Update Extension",
+          "request": {
+            "name": "Update Extension",
+            "description": {
+              "content": "Updates the configuration of an existing extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "extensionId",
+                  "description": "(Required) Extension identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"forward_to\": \"<string>\",\n  \"do_not_disturb\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "690d1b57-b0f9-4b14-b929-f85aee54e566",
+              "name": "Extension updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "extensionId",
+                      "description": "(Required) Extension identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"forward_to\": \"<string>\",\n  \"do_not_disturb\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"number\": \"string\",\n  \"name\": \"string\",\n  \"tenant\": \"string\",\n  \"type\": \"conference\",\n  \"status\": \"inactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2966b552-27b2-4d8b-969e-81079c2d5844",
+      "name": "users",
+      "description": {
+        "content": "User account management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99c96266-5851-482b-8df2-3681c62b0663",
+          "name": "List Users",
+          "request": {
+            "name": "List Users",
+            "description": {
+              "content": "Returns a list of all users configured in the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0211f2a0-6526-47dc-8ca1-75aa96051a6e",
+              "name": "List of users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"email\": \"string\",\n    \"extension\": \"string\",\n    \"role\": \"read_only\",\n    \"tenant\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"email\": \"string\",\n    \"extension\": \"string\",\n    \"role\": \"admin\",\n    \"tenant\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ef93a22-769c-4504-a2b0-ebc51d2722aa",
+          "name": "Create User",
+          "request": {
+            "name": "Create User",
+            "description": {
+              "content": "Creates a new user account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<string>\",\n  \"extension\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe8ed006-3042-4e51-aab4-bfb113647500",
+              "name": "User created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<string>\",\n  \"extension\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"extension\": \"string\",\n  \"role\": \"read_only\",\n  \"tenant\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "303edcbd-dd20-45ee-be76-be303e04605c",
+          "name": "Get User",
+          "request": {
+            "name": "Get User",
+            "description": {
+              "content": "Retrieves details of a specific user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59ad945c-e2cb-433d-a329-ff187690cb8e",
+              "name": "User details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"extension\": \"string\",\n  \"role\": \"read_only\",\n  \"tenant\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81aa5b6e-3522-4c4e-9411-987c75fcfe5c",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Updates an existing user's configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<string>\",\n  \"extension\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2d1aab2-8908-4068-a2b4-6b61908570a8",
+              "name": "User updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<string>\",\n  \"extension\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17bae33b-dc1e-4ba8-a3a7-8a0a95c7fb85",
+          "name": "Delete User",
+          "request": {
+            "name": "Delete User",
+            "description": {
+              "content": "Removes a user account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec68b93e-6f92-4fcc-831c-5cc6fa7a03d7",
+              "name": "User deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "489d3dde-ec9d-415b-92c2-73d319b070e8",
+      "name": "tenants",
+      "description": {
+        "content": "Tenant administration",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "126ce8fb-a741-4505-87ac-84081d39e341",
+      "name": "auto-attendants",
+      "description": {
+        "content": "Auto-attendant configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c1e6eeb-6689-4ae9-9f5a-33bd0df9a1c2",
+          "name": "List Auto-attendants",
+          "request": {
+            "name": "List Auto-attendants",
+            "description": {
+              "content": "Returns a list of all auto-attendants configured in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "18620bb6-cfc7-4d24-bc2e-1d8138dd07ac",
+              "name": "List of auto-attendants",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"greeting\": \"string\",\n    \"menu_options\": [\n      {\n        \"digit\": \"string\",\n        \"action\": \"disconnect\",\n        \"destination\": \"string\"\n      },\n      {\n        \"digit\": \"string\",\n        \"action\": \"voicemail\",\n        \"destination\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"greeting\": \"string\",\n    \"menu_options\": [\n      {\n        \"digit\": \"string\",\n        \"action\": \"transfer\",\n        \"destination\": \"string\"\n      },\n      {\n        \"digit\": \"string\",\n        \"action\": \"transfer\",\n        \"destination\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d78b30b1-b663-4c7f-98e4-b33be43692f9",
+          "name": "Create Auto-attendant",
+          "request": {
+            "name": "Create Auto-attendant",
+            "description": {
+              "content": "Creates a new auto-attendant with defined menu options and routing rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a91702a-6f03-4706-b3f3-df82b405c72f",
+              "name": "Auto-attendant created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"greeting\": \"string\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7f54600-7a19-475b-b2eb-5b248ca1c0cd",
+          "name": "Get Auto-attendant",
+          "request": {
+            "name": "Get Auto-attendant",
+            "description": {
+              "content": "Retrieves configuration details of a specific auto-attendant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants",
+                ":attendantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attendantId",
+                  "description": "(Required) Auto-attendant identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8678924e-4e57-4af2-9142-9ebd110465d1",
+              "name": "Auto-attendant details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants",
+                    ":attendantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attendantId",
+                      "description": "(Required) Auto-attendant identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"greeting\": \"string\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d7fbd4a-2831-4b45-b7f5-01616fa2a0d8",
+          "name": "Update Auto-attendant",
+          "request": {
+            "name": "Update Auto-attendant",
+            "description": {
+              "content": "Updates the configuration of an existing auto-attendant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants",
+                ":attendantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attendantId",
+                  "description": "(Required) Auto-attendant identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b8204c3d-9ba0-4bfd-bd6a-dd2fe94f6c48",
+              "name": "Auto-attendant updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants",
+                    ":attendantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attendantId",
+                      "description": "(Required) Auto-attendant identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbd0ad8d-a074-4a71-a87b-a92b5251e208",
+          "name": "Delete Auto-attendant",
+          "request": {
+            "name": "Delete Auto-attendant",
+            "description": {
+              "content": "Removes an auto-attendant configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants",
+                ":attendantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attendantId",
+                  "description": "(Required) Auto-attendant identifier"
+                },
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c308a34-66b8-4a67-a22f-6402bceb1f6f",
+              "name": "Auto-attendant deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants",
+                    ":attendantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attendantId",
+                      "description": "(Required) Auto-attendant identifier"
+                    },
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f300f4af-750f-4b14-8563-e54e3f5c2000",
+      "name": "system",
+      "description": {
+        "content": "System-level operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1c353898-0331-4dfa-931f-8b55cf0e5859",
+          "name": "Get API Entry Point",
+          "request": {
+            "name": "Get API Entry Point",
+            "description": {
+              "content": "Returns the HAL resource entry point with links to available API resources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "WebAdmin server hostname",
+                  "type": "any",
+                  "value": "{{webadmin}}",
+                  "key": "webadmin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dcd51f7-df0f-413f-8316-e2707a420e6f",
+              "name": "HAL entry point with resource links",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"_links\": {\n    \"key_0\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    },\n    \"key_1\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    },\n    \"key_2\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76ee6685-d8ef-4cb5-99b9-fea6cbd2bfd8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "WebAdmin server hostname",
+                      "type": "any",
+                      "value": "{{webadmin}}",
+                      "key": "webadmin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5723,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "WebAdmin server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "webadmin.windstreamenterprise.com",
+      "key": "webadmin"
+    },
+    {
+      "type": "string",
+      "value": "https://{{webadmin}}/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ce0e21f3-5711-49f9-acf0-252489c3f82f",
+    "name": "Windstream Enterprise Voice API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Windstream Enterprise Voice API (silhouette) is a REST-based web service with WebSocket support for real-time events. It enables developers to make and receive calls, manage auto-attendants, control call routing, and configure UC (Unified Communications) settings for OfficeSuite UC deployments. The API accepts and delivers content in JSON format and follows HAL (Hypertext Application Language) specifications for resource linking.\n\nContact Support:\n Name: Windstream Enterprise Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

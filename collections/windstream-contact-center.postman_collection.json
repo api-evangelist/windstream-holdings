@@ -1,0 +1,2651 @@
+{
+  "item": [
+    {
+      "id": "313b6e54-83b3-430b-b35b-5edffbfad701",
+      "name": "products",
+      "description": {
+        "content": "Product catalog operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c73fe4d7-b93a-4106-94e1-a6dbacc8a80e",
+          "name": "List Products",
+          "request": {
+            "name": "List Products",
+            "description": {
+              "content": "Returns a list of all available contact center products.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d05d73bd-9c3d-4219-9ffa-a9f0dd78f6c2",
+              "name": "List of products",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad9722c7-3753-4522-ae58-c29d8b6548d3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5e141cea-831f-4a05-992f-d2596652249a",
+      "name": "tenants",
+      "description": {
+        "content": "Tenant management and configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ec18b01-63c3-4f93-b64c-d04ac16f3e58",
+          "name": "List Tenants",
+          "request": {
+            "name": "List Tenants",
+            "description": {
+              "content": "Returns a list of all tenants managed by the contact center.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e54e52ea-a4df-43fa-8e1c-4e79b1d711df",
+              "name": "List of tenants",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"uuid\": \"13f42595-cdc6-53f5-a281-a9873df6698f\",\n    \"name\": \"string\",\n    \"status\": \"active\",\n    \"max_agents\": 7097,\n    \"max_calls\": 662\n  },\n  {\n    \"uuid\": \"4409df92-d8ec-aad8-20bd-ab94d3f21760\",\n    \"name\": \"string\",\n    \"status\": \"inactive\",\n    \"max_agents\": 3258,\n    \"max_calls\": 5105\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29e28aeb-ea05-4fb3-976a-39afb5fd4936",
+          "name": "Get Tenant Details",
+          "request": {
+            "name": "Get Tenant Details",
+            "description": {
+              "content": "Returns detailed configuration for a specific tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72bac895-aef0-473e-911f-d29eac115e66",
+              "name": "Tenant details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"f2f3a2c6-1572-d2a2-0831-acf4c3c13547\",\n  \"name\": \"string\",\n  \"status\": \"active\",\n  \"max_agents\": 5308,\n  \"max_calls\": 251\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "775434a4-f62b-49c6-b121-a61d5123f90b",
+              "name": "Tenant not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ff6f1d2-6b80-4076-bcfb-5dac29c77c67",
+          "name": "Update Tenant Products",
+          "request": {
+            "name": "Update Tenant Products",
+            "description": {
+              "content": "Adds or removes product assignments for a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"add\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4ae75ae-9ac2-4f77-9a13-0eede7cee2b4",
+              "name": "Products updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "896a5e88-23f1-4a40-8914-83ecb4f1441a",
+          "name": "Update Tenant Limits",
+          "request": {
+            "name": "Update Tenant Limits",
+            "description": {
+              "content": "Updates usage limits and license counts for a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"max_agents\": \"<integer>\",\n  \"max_calls\": \"<integer>\",\n  \"sms_limit\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e3e7fd10-0720-49d1-a83f-1764c8c0fccc",
+              "name": "Tenant limits updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"max_agents\": \"<integer>\",\n  \"max_calls\": \"<integer>\",\n  \"sms_limit\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a30f1243-7bc9-4949-95a9-30f0b82cae67",
+          "name": "List Tenant Roles",
+          "request": {
+            "name": "List Tenant Roles",
+            "description": {
+              "content": "Returns all roles configured for a specific tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6151fd13-360a-4547-b5c5-8ffa765d2cf2",
+              "name": "List of tenant roles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"API\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"Agent Events\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a098db9-a494-4a4a-9d53-060c64e13254",
+          "name": "List Tenant ACDs",
+          "request": {
+            "name": "List Tenant ACDs",
+            "description": {
+              "content": "Returns all Automatic Call Distributors (ACDs/queues) for a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "acds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66483473-a3f1-4f92-9455-f11c84504967",
+              "name": "List of ACDs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "acds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"tenant_uuid\": \"string\",\n    \"max_queue_length\": 2474,\n    \"current_queue_length\": 1850,\n    \"agents_available\": 2842\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"tenant_uuid\": \"string\",\n    \"max_queue_length\": 9375,\n    \"current_queue_length\": 5289,\n    \"agents_available\": 559\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5a6964c-05e5-4792-89e7-d11c3785e6dd",
+          "name": "List Presence Options",
+          "request": {
+            "name": "List Presence Options",
+            "description": {
+              "content": "Returns available presence/status options for agents in a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "presence-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "642d3111-a9a8-4700-82c8-9befe826b727",
+              "name": "List of presence options",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "presence-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"available_for_calls\": true\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"available_for_calls\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6001c421-d1f7-4ee1-9661-74c6d65809bc",
+          "name": "List Tenant Extensions",
+          "request": {
+            "name": "List Tenant Extensions",
+            "description": {
+              "content": "Returns all extensions configured for a specific tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "791099a8-b259-4662-b529-4f7690c880b7",
+              "name": "List of extensions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"uuid\": \"127d2f16-af2a-2ba8-bedc-f0981ec68afe\",\n    \"number\": \"string\",\n    \"name\": \"string\",\n    \"tenant_uuid\": \"string\"\n  },\n  {\n    \"uuid\": \"f62ad01b-2e54-13dd-119d-cdcd46aa072e\",\n    \"number\": \"string\",\n    \"name\": \"string\",\n    \"tenant_uuid\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cd1f0f6-632e-49ac-9d6c-00359199fba6",
+          "name": "Update Tenant Extension",
+          "request": {
+            "name": "Update Tenant Extension",
+            "description": {
+              "content": "Updates configuration for a specific extension within a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "extensions",
+                ":extensionUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "extensionUuid",
+                  "description": "(Required) Extension UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db17fb86-cbcd-4262-a4f3-9fb9675d5835",
+              "name": "Extension updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "extensions",
+                    ":extensionUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "extensionUuid",
+                      "description": "(Required) Extension UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88a40c95-d42b-4315-a808-a1b03bdba49d",
+          "name": "Get Text Message Count",
+          "request": {
+            "name": "Get Text Message Count",
+            "description": {
+              "content": "Returns the SMS/MMS message count for a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "text-count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d4a5a35-bcfb-4f42-9b25-83b926143c3c",
+              "name": "SMS/MMS count",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "text-count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sms_count\": 8044,\n  \"mms_count\": 5879,\n  \"period_start\": \"1965-01-24T01:16:10.324Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7f4e2e5-d544-4e2f-9985-b4abd77cbe39",
+          "name": "Reset Text Message Count",
+          "request": {
+            "name": "Reset Text Message Count",
+            "description": {
+              "content": "Resets the SMS/MMS message count for a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "text-count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da03da80-ac7b-498a-8d31-60f0f3627fed",
+              "name": "Count reset successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "text-count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c50839e0-bdce-4297-be03-35ca22b53da9",
+      "name": "extensions",
+      "description": {
+        "content": "Extension management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6d990d8-e8b3-4e09-8bb4-ffe9af63346f",
+          "name": "List Tenant Extensions",
+          "request": {
+            "name": "List Tenant Extensions",
+            "description": {
+              "content": "Returns all extensions configured for a specific tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80d19a29-6197-4285-94df-e6bba894722d",
+              "name": "List of extensions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"uuid\": \"a13a27d8-33c2-15d3-684b-f9ab1220d513\",\n    \"number\": \"string\",\n    \"name\": \"string\",\n    \"tenant_uuid\": \"string\"\n  },\n  {\n    \"uuid\": \"994b76f1-c3b6-710c-dc86-4c87280b94d3\",\n    \"number\": \"string\",\n    \"name\": \"string\",\n    \"tenant_uuid\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7079a046-0073-4824-8f85-7908590ea7d4",
+          "name": "Update Tenant Extension",
+          "request": {
+            "name": "Update Tenant Extension",
+            "description": {
+              "content": "Updates configuration for a specific extension within a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "extensions",
+                ":extensionUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "extensionUuid",
+                  "description": "(Required) Extension UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddaa4ab4-db54-4ea6-84bd-a04a036dbcab",
+              "name": "Extension updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "extensions",
+                    ":extensionUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "extensionUuid",
+                      "description": "(Required) Extension UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eaa6ee43-1fc9-47dd-8ef3-f1183b49ef94",
+          "name": "Get Agent State",
+          "request": {
+            "name": "Get Agent State",
+            "description": {
+              "content": "Returns the current presence/state of a specific agent extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionUuid",
+                "agent-state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "extensionUuid",
+                  "description": "(Required) Extension UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fda62305-f1ec-4b89-8a2d-847c5e6d1a86",
+              "name": "Agent state details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionUuid",
+                    "agent-state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "extensionUuid",
+                      "description": "(Required) Extension UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"extension_uuid\": \"string\",\n  \"state\": \"string\",\n  \"available_for_calls\": true,\n  \"updated_at\": \"1987-04-08T01:48:06.772Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8f79d0c5-81af-4c6d-985f-2ad46ed7d5ec",
+      "name": "calls",
+      "description": {
+        "content": "Call management and control",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff1e0c0f-2417-4627-a929-820d5215a3ed",
+          "name": "List Calls",
+          "request": {
+            "name": "List Calls",
+            "description": {
+              "content": "Returns a list of active and recent calls in the contact center.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd577153-ac28-4ad1-a2d3-bf51d42bc84c",
+              "name": "List of calls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"held\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"2014-12-12T16:26:47.824Z\",\n    \"duration\": 3505\n  },\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"alerting\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"1964-09-01T08:56:22.383Z\",\n    \"duration\": 898\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6173cc64-a299-4cd7-adc0-3fc1d2a052f4",
+          "name": "Get Call",
+          "request": {
+            "name": "Get Call",
+            "description": {
+              "content": "Returns details for a specific call by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Call identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec5cba75-532d-4565-82cd-439a4fa53d69",
+              "name": "Call details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Call identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"calling_number\": \"string\",\n  \"called_number\": \"string\",\n  \"state\": \"completed\",\n  \"tenant_uuid\": \"string\",\n  \"started_at\": \"2021-06-17T10:57:22.167Z\",\n  \"duration\": 1779\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e21457d-5fb7-4bb3-ae79-7ec6cc7b5d04",
+          "name": "Control Call",
+          "request": {
+            "name": "Control Call",
+            "description": {
+              "content": "Executes a control action on an active call. Supported actions include startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Call identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d61a21a1-4945-4f20-a0c8-9a8b62bb4612",
+              "name": "Control action executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Call identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "433fa5ee-2625-4e8c-9861-8970f70e2885",
+          "name": "Search Calls",
+          "request": {
+            "name": "Search Calls",
+            "description": {
+              "content": "Searches calls by various criteria including calling number, called number, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calling_number",
+                  "value": "<string>",
+                  "description": "Filter by calling party number"
+                },
+                {
+                  "disabled": false,
+                  "key": "called_number",
+                  "value": "<string>",
+                  "description": "Filter by called party number"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_datetime",
+                  "value": "<dateTime>",
+                  "description": "Start of date range filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_datetime",
+                  "value": "<dateTime>",
+                  "description": "End of date range filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_z",
+                  "value": "<string>",
+                  "description": "Timezone for date range (e.g., America/New_York)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7fa9c9af-b072-4db9-8838-f347d8400e47",
+              "name": "Filtered list of calls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calling_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "called_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_datetime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to_datetime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "time_z",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"held\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"2014-12-12T16:26:47.824Z\",\n    \"duration\": 3505\n  },\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"alerting\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"1964-09-01T08:56:22.383Z\",\n    \"duration\": 898\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0b952c2d-7ff5-4d1d-aeb8-81d341b803c0",
+      "name": "agents",
+      "description": {
+        "content": "Agent state management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a66b6040-1baa-4b0f-915f-801a41e078af",
+          "name": "List Presence Options",
+          "request": {
+            "name": "List Presence Options",
+            "description": {
+              "content": "Returns available presence/status options for agents in a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "presence-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a4afe2e-4ec9-40f7-9613-fd9e1b207ffa",
+              "name": "List of presence options",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "presence-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"available_for_calls\": false\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"available_for_calls\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae30adc4-3c4e-4ca4-bac4-8272e5ea7ee4",
+          "name": "Update Agent State",
+          "request": {
+            "name": "Update Agent State",
+            "description": {
+              "content": "Updates the current agent's presence state (e.g., available, busy, on break).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent-state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5f15cd6-f09b-45b9-ad2f-58cf48a61a36",
+              "name": "Agent state updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent-state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1df454f-4739-45ac-8404-eebcc495f210",
+          "name": "Get Agent State",
+          "request": {
+            "name": "Get Agent State",
+            "description": {
+              "content": "Returns the current presence/state of a specific agent extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionUuid",
+                "agent-state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "extensionUuid",
+                  "description": "(Required) Extension UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d38b581-2254-44f6-b9f7-d95c6de6f2a0",
+              "name": "Agent state details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionUuid",
+                    "agent-state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "extensionUuid",
+                      "description": "(Required) Extension UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"extension_uuid\": \"string\",\n  \"state\": \"string\",\n  \"available_for_calls\": true,\n  \"updated_at\": \"1987-04-08T01:48:06.772Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "feb65bfe-8ebd-425f-8ce0-b776c9652d87",
+      "name": "roles",
+      "description": {
+        "content": "Role and permission management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c320f03-abc9-4799-8265-b6bbff80f925",
+          "name": "List Roles",
+          "request": {
+            "name": "List Roles",
+            "description": {
+              "content": "Returns a list of all roles and permissions available in the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "roles",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cf8b87a-130d-431a-a52e-549e4c3e0b71",
+              "name": "List of roles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "roles",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"Agent Events\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"Agent Events\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e415fafe-83bc-4f46-97f4-8969789cd37b",
+          "name": "List Tenant Roles",
+          "request": {
+            "name": "List Tenant Roles",
+            "description": {
+              "content": "Returns all roles configured for a specific tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e2e9259-1450-4a89-975d-e42fa1206603",
+              "name": "List of tenant roles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"Agent Events\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"Agent Events\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "CCS domain hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "ccs.windstreamenterprise.com",
+      "key": "ccs_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ccs_domain}}/6/v2/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7eb755ec-66a5-4326-b00c-15f3168e41af",
+    "name": "Windstream Enterprise Contact Center Services API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.\n\nContact Support:\n Name: Windstream Enterprise Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

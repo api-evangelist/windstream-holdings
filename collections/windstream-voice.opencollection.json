@@ -1,0 +1,416 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windstream Enterprise Voice API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "system",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get API Entry Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/"
+          },
+          "docs": "Returns the HAL resource entry point with links to available API resources."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Active Calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/calls",
+            "params": [
+              {
+                "name": "extension",
+                "value": "",
+                "type": "query",
+                "description": "Filter calls by extension number"
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Filter calls by tenant ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of currently active calls in the system."
+        },
+        {
+          "info": {
+            "name": "Get Call Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Unique call identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific active call by its ID."
+        },
+        {
+          "info": {
+            "name": "Control Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{webadmin}/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Unique call identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a control action on an active call. Supported actions include transfer, hold, conference, record, and terminate."
+        },
+        {
+          "info": {
+            "name": "Terminate Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{webadmin}/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Unique call identifier"
+              }
+            ]
+          },
+          "docs": "Terminates an active call."
+        },
+        {
+          "info": {
+            "name": "Make Outbound Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{webadmin}/api/calls/outbound",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an outbound call from a specified extension to a destination number."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "extensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/extensions",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID to filter extensions"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              }
+            ]
+          },
+          "docs": "Returns a list of all extensions in the tenant."
+        },
+        {
+          "info": {
+            "name": "Get Extension Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "Extension identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific extension."
+        },
+        {
+          "info": {
+            "name": "Update Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{webadmin}/api/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "Extension identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing extension."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "auto-attendants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Auto-attendants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/auto-attendants"
+          },
+          "docs": "Returns a list of all auto-attendants configured in the tenant."
+        },
+        {
+          "info": {
+            "name": "Create Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{webadmin}/api/auto-attendants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new auto-attendant with defined menu options and routing rules."
+        },
+        {
+          "info": {
+            "name": "Get Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/auto-attendants/:attendantId",
+            "params": [
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "path",
+                "description": "Auto-attendant identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves configuration details of a specific auto-attendant."
+        },
+        {
+          "info": {
+            "name": "Update Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{webadmin}/api/auto-attendants/:attendantId",
+            "params": [
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "path",
+                "description": "Auto-attendant identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing auto-attendant."
+        },
+        {
+          "info": {
+            "name": "Delete Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{webadmin}/api/auto-attendants/:attendantId",
+            "params": [
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "path",
+                "description": "Auto-attendant identifier"
+              }
+            ]
+          },
+          "docs": "Removes an auto-attendant configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/users"
+          },
+          "docs": "Returns a list of all users configured in the system."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{webadmin}/api/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user account."
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{webadmin}/api/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific user."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{webadmin}/api/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing user's configuration."
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{webadmin}/api/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ]
+          },
+          "docs": "Removes a user account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

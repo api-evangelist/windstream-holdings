@@ -1,0 +1,421 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windstream Enterprise Contact Center Services API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/products/"
+          },
+          "docs": "Returns a list of all available contact center products."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/roles/"
+          },
+          "docs": "Returns a list of all roles and permissions available in the system."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "tenants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants"
+          },
+          "docs": "Returns a list of all tenants managed by the contact center."
+        },
+        {
+          "info": {
+            "name": "Get Tenant Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns detailed configuration for a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Update Tenant Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds or removes product assignments for a tenant."
+        },
+        {
+          "info": {
+            "name": "Update Tenant Limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates usage limits and license counts for a tenant."
+        },
+        {
+          "info": {
+            "name": "List Tenant Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/roles",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns all roles configured for a specific tenant."
+        },
+        {
+          "info": {
+            "name": "List Tenant ACDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/acds",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns all Automatic Call Distributors (ACDs/queues) for a tenant."
+        },
+        {
+          "info": {
+            "name": "List Presence Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/presence-options",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns available presence/status options for agents in a tenant."
+        },
+        {
+          "info": {
+            "name": "List Tenant Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/extensions",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns all extensions configured for a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Update Tenant Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/extensions/:extensionUuid",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              },
+              {
+                "name": "extensionUuid",
+                "value": "",
+                "type": "path",
+                "description": "Extension UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates configuration for a specific extension within a tenant."
+        },
+        {
+          "info": {
+            "name": "Get Text Message Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/text-count",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns the SMS/MMS message count for a tenant."
+        },
+        {
+          "info": {
+            "name": "Reset Text Message Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/text-count",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Resets the SMS/MMS message count for a tenant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/calls"
+          },
+          "docs": "Returns a list of active and recent calls in the contact center."
+        },
+        {
+          "info": {
+            "name": "Get Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Call identifier"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific call by its ID."
+        },
+        {
+          "info": {
+            "name": "Control Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Call identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a control action on an active call. Supported actions include startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill."
+        },
+        {
+          "info": {
+            "name": "Search Calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/calls/filter",
+            "params": [
+              {
+                "name": "calling_number",
+                "value": "",
+                "type": "query",
+                "description": "Filter by calling party number"
+              },
+              {
+                "name": "called_number",
+                "value": "",
+                "type": "query",
+                "description": "Filter by called party number"
+              },
+              {
+                "name": "from_datetime",
+                "value": "",
+                "type": "query",
+                "description": "Start of date range filter (ISO 8601)"
+              },
+              {
+                "name": "to_datetime",
+                "value": "",
+                "type": "query",
+                "description": "End of date range filter (ISO 8601)"
+              },
+              {
+                "name": "time_z",
+                "value": "",
+                "type": "query",
+                "description": "Timezone for date range (e.g., America/New_York)"
+              }
+            ]
+          },
+          "docs": "Searches calls by various criteria including calling number, called number, and date range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Agent State",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/agent-state",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the current agent's presence state (e.g., available, busy, on break)."
+        },
+        {
+          "info": {
+            "name": "Get Agent State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/extensions/:extensionUuid/agent-state",
+            "params": [
+              {
+                "name": "extensionUuid",
+                "value": "",
+                "type": "path",
+                "description": "Extension UUID"
+              }
+            ]
+          },
+          "docs": "Returns the current presence/state of a specific agent extension."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
