@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/windstream-contact-center-openapi.yml, openapi/windstream-voice-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Bearer token authentication for CCS API
+  sources:
+  - openapi/windstream-contact-center-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: 'HTTP Basic Authentication using extension@tenantId credentials. Username formats:
+    ext@tenantId, ext@tenantId.ID, ext@tenantDID.DID, ext@tenantURI.URI'
+  sources:
+  - openapi/windstream-voice-openapi.yml
