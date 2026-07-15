@@ -73,6 +73,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/openapi/windstream-contact-center-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/windstream-holdings-agentic-access.yml
   - type: DomainSecurity
     url: security/windstream-holdings-domain-security.yml
   - type: Authentication
