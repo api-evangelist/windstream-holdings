@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: Windstream Enterprise Contact Center Services agents auto-attendants API
+  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
+  version: 2.0.0
+  contact:
+    name: Windstream Enterprise Developer Support
+    url: https://api.solutions.uniti.com/
+  termsOfService: https://www.windstreamenterprise.com/legal/
+servers:
+- url: https://{ccs_domain}/6/v2/api
+  description: CCS REST API
+  variables:
+    ccs_domain:
+      default: ccs.windstreamenterprise.com
+      description: CCS domain hostname
+tags:
+- name: auto-attendants
+  description: Auto-attendant configuration
+paths:
+  /auto-attendants:
+    get:
+      operationId: listAutoAttendants
+      summary: List Auto-attendants
+      description: Returns a list of all auto-attendants configured in the tenant.
+      tags:
+      - auto-attendants
+      responses:
+        '200':
+          description: List of auto-attendants
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AutoAttendant'
+    post:
+      operationId: createAutoAttendant
+      summary: Create Auto-attendant
+      description: Creates a new auto-attendant with defined menu options and routing rules.
+      tags:
+      - auto-attendants
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoAttendantCreate'
+      responses:
+        '201':
+          description: Auto-attendant created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutoAttendant'
+  /auto-attendants/{attendantId}:
+    get:
+      operationId: getAutoAttendant
+      summary: Get Auto-attendant
+      description: Retrieves configuration details of a specific auto-attendant.
+      tags:
+      - auto-attendants
+      parameters:
+      - name: attendantId
+        in: path
+        required: true
+        description: Auto-attendant identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Auto-attendant details
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AutoAttendant'
+    put:
+      operationId: updateAutoAttendant
+      summary: Update Auto-attendant
+      description: Updates the configuration of an existing auto-attendant.
+      tags:
+      - auto-attendants
+      parameters:
+      - name: attendantId
+        in: path
+        required: true
+        description: Auto-attendant identifier
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoAttendantCreate'
+      responses:
+        '200':
+          description: Auto-attendant updated
+    delete:
+      operationId: deleteAutoAttendant
+      summary: Delete Auto-attendant
+      description: Removes an auto-attendant configuration.
+      tags:
+      - auto-attendants
+      parameters:
+      - name: attendantId
+        in: path
+        required: true
+        description: Auto-attendant identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Auto-attendant deleted
+components:
+  schemas:
+    MenuOption:
+      type: object
+      description: A single DTMF menu option
+      properties:
+        digit:
+          type: string
+          description: 'DTMF digit (0-9, *, #)'
+        action:
+          type: string
+          description: Action to take when digit is pressed
+          enum:
+          - transfer
+          - voicemail
+          - repeat_menu
+          - disconnect
+        destination:
+          type: string
+          description: Transfer destination if action is transfer
+    AutoAttendantCreate:
+      type: object
+      description: Request body for creating or updating an auto-attendant
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Display name
+        greeting:
+          type: string
+          description: Greeting message
+        menu_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuOption'
+    AutoAttendant:
+      type: object
+      description: An auto-attendant (IVR) configuration
+      properties:
+        id:
+          type: string
+          description: Auto-attendant identifier
+        name:
+          type: string
+          description: Display name
+        greeting:
+          type: string
+          description: Greeting message or audio file path
+        menu_options:
+          type: array
+          description: DTMF menu options
+          items:
+            $ref: '#/components/schemas/MenuOption'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication for CCS API

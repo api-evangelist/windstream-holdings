@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Windstream Enterprise Contact Center Services agents roles API
+  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
+  version: 2.0.0
+  contact:
+    name: Windstream Enterprise Developer Support
+    url: https://api.solutions.uniti.com/
+  termsOfService: https://www.windstreamenterprise.com/legal/
+servers:
+- url: https://{ccs_domain}/6/v2/api
+  description: CCS REST API
+  variables:
+    ccs_domain:
+      default: ccs.windstreamenterprise.com
+      description: CCS domain hostname
+tags:
+- name: roles
+  description: Role and permission management
+paths:
+  /roles/:
+    get:
+      operationId: listRoles
+      summary: List Roles
+      description: Returns a list of all roles and permissions available in the system.
+      tags:
+      - roles
+      responses:
+        '200':
+          description: List of roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+  /tenants/{tenantUuid}/roles:
+    get:
+      operationId: listTenantRoles
+      summary: List Tenant Roles
+      description: Returns all roles configured for a specific tenant.
+      tags:
+      - roles
+      parameters:
+      - name: tenantUuid
+        in: path
+        required: true
+        description: Tenant UUID
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: List of tenant roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+components:
+  schemas:
+    Role:
+      type: object
+      description: A role with associated permissions
+      properties:
+        id:
+          type: string
+          description: Role identifier
+        name:
+          type: string
+          description: Role name
+          enum:
+          - API
+          - Agent Control
+          - Call Control
+          - Agent Events
+          - Call Events
+          - Inbound Queue Events
+        description:
+          type: string
+          description: Role description
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication for CCS API

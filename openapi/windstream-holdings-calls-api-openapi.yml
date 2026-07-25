@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: Windstream Enterprise Contact Center Services agents calls API
+  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
+  version: 2.0.0
+  contact:
+    name: Windstream Enterprise Developer Support
+    url: https://api.solutions.uniti.com/
+  termsOfService: https://www.windstreamenterprise.com/legal/
+servers:
+- url: https://{ccs_domain}/6/v2/api
+  description: CCS REST API
+  variables:
+    ccs_domain:
+      default: ccs.windstreamenterprise.com
+      description: CCS domain hostname
+tags:
+- name: calls
+  description: Call management and control
+paths:
+  /calls:
+    get:
+      operationId: listCalls
+      summary: List Calls
+      description: Returns a list of active and recent calls in the contact center.
+      tags:
+      - calls
+      responses:
+        '200':
+          description: List of calls
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Call'
+  /calls/{callId}:
+    get:
+      operationId: getCall
+      summary: Get Call
+      description: Returns details for a specific call by its ID.
+      tags:
+      - calls
+      parameters:
+      - name: callId
+        in: path
+        required: true
+        description: Call identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Call details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+    post:
+      operationId: controlCall
+      summary: Control Call
+      description: Executes a control action on an active call. Supported actions include startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill.
+      tags:
+      - calls
+      parameters:
+      - name: callId
+        in: path
+        required: true
+        description: Call identifier
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallControlRequest'
+      responses:
+        '200':
+          description: Control action executed
+    delete:
+      operationId: terminateCall
+      summary: Terminate Call
+      description: Terminates an active call.
+      tags:
+      - calls
+      parameters:
+      - name: callId
+        in: path
+        required: true
+        description: Unique call identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Call terminated successfully
+        '404':
+          description: Call not found
+  /calls/filter:
+    get:
+      operationId: searchCalls
+      summary: Search Calls
+      description: Searches calls by various criteria including calling number, called number, and date range.
+      tags:
+      - calls
+      parameters:
+      - name: calling_number
+        in: query
+        description: Filter by calling party number
+        required: false
+        schema:
+          type: string
+      - name: called_number
+        in: query
+        description: Filter by called party number
+        required: false
+        schema:
+          type: string
+      - name: from_datetime
+        in: query
+        description: Start of date range filter (ISO 8601)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: to_datetime
+        in: query
+        description: End of date range filter (ISO 8601)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: time_z
+        in: query
+        description: Timezone for date range (e.g., America/New_York)
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Filtered list of calls
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Call'
+  /calls/outbound:
+    post:
+      operationId: makeOutboundCall
+      summary: Make Outbound Call
+      description: Initiates an outbound call from a specified extension to a destination number.
+      tags:
+      - calls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutboundCallRequest'
+      responses:
+        '201':
+          description: Outbound call initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call_2'
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    CallControlRequest:
+      type: object
+      description: Call control action request
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: Control action to execute
+          enum:
+          - startSuppression
+          - stopSuppression
+          - kill
+          - wait_transfer
+          - wait_redirect
+          - wait_kill
+    OutboundCallRequest:
+      type: object
+      description: Request to initiate an outbound call
+      required:
+      - from
+      - to
+      properties:
+        from:
+          type: string
+          description: Source extension number
+        to:
+          type: string
+          description: Destination phone number or extension
+        caller_id:
+          type: string
+          description: Caller ID to present to the called party
+    Call_2:
+      type: object
+      description: An active or completed phone call
+      properties:
+        id:
+          type: string
+          description: Unique call identifier
+        state:
+          type: string
+          description: Current call state
+          enum:
+          - alerting
+          - connected
+          - held
+          - transferring
+        caller:
+          type: string
+          description: Calling party extension or number
+        callee:
+          type: string
+          description: Called party extension or number
+        direction:
+          type: string
+          description: Call direction
+          enum:
+          - inbound
+          - outbound
+        duration:
+          type: integer
+          description: Call duration in seconds
+        startedAt:
+          type: string
+          format: date-time
+          description: Call start timestamp
+        _links:
+          type: object
+          description: HAL links for call actions
+    Call:
+      type: object
+      description: A call record in the contact center
+      properties:
+        id:
+          type: string
+          description: Call identifier
+        calling_number:
+          type: string
+          description: Calling party number
+        called_number:
+          type: string
+          description: Called party number
+        state:
+          type: string
+          description: Current call state
+          enum:
+          - alerting
+          - connected
+          - held
+          - queued
+          - completed
+        tenant_uuid:
+          type: string
+          description: Tenant UUID
+        started_at:
+          type: string
+          format: date-time
+          description: Call start time
+        duration:
+          type: integer
+          description: Call duration in seconds
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication for CCS API

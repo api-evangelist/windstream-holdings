@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: Windstream Enterprise Contact Center Services agents products API
+  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
+  version: 2.0.0
+  contact:
+    name: Windstream Enterprise Developer Support
+    url: https://api.solutions.uniti.com/
+  termsOfService: https://www.windstreamenterprise.com/legal/
+servers:
+- url: https://{ccs_domain}/6/v2/api
+  description: CCS REST API
+  variables:
+    ccs_domain:
+      default: ccs.windstreamenterprise.com
+      description: CCS domain hostname
+tags:
+- name: products
+  description: Product catalog operations
+paths:
+  /products/:
+    get:
+      operationId: listProducts
+      summary: List Products
+      description: Returns a list of all available contact center products.
+      tags:
+      - products
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Product:
+      type: object
+      description: A contact center product offering
+      properties:
+        id:
+          type: string
+          description: Product identifier
+        name:
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication for CCS API

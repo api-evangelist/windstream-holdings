@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: Windstream Enterprise Contact Center Services agents system API
+  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
+  version: 2.0.0
+  contact:
+    name: Windstream Enterprise Developer Support
+    url: https://api.solutions.uniti.com/
+  termsOfService: https://www.windstreamenterprise.com/legal/
+servers:
+- url: https://{ccs_domain}/6/v2/api
+  description: CCS REST API
+  variables:
+    ccs_domain:
+      default: ccs.windstreamenterprise.com
+      description: CCS domain hostname
+tags:
+- name: system
+  description: System-level operations
+paths:
+  /:
+    get:
+      operationId: getApiEntryPoint
+      summary: Get API Entry Point
+      description: Returns the HAL resource entry point with links to available API resources.
+      tags:
+      - system
+      responses:
+        '200':
+          description: HAL entry point with resource links
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/HalResource'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    HalLink:
+      type: object
+      description: HAL link object
+      properties:
+        href:
+          type: string
+          description: URL of the linked resource
+        title:
+          type: string
+          description: Human-readable title of the link
+    HalResource:
+      type: object
+      description: HAL (Hypertext Application Language) resource with embedded links
+      properties:
+        _links:
+          type: object
+          description: HAL links to related resources
+          additionalProperties:
+            $ref: '#/components/schemas/HalLink'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Error message
+        details:
+          type: string
+          description: Additional error details
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication for CCS API
