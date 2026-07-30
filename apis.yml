@@ -8,9 +8,22 @@ description: >-
   network transport. Windstream delivers voice, data, and managed networking solutions to more than 18 states with over
   2.1 million fiber-to-the-premise passings.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Producer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/windstream-holdings.png
 tags:
   - Broadband
   - Contact Center
@@ -26,52 +39,150 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: windstream-holdings:windstream-voice-api
-    name: Windstream Enterprise Voice API
-    description: >-
-      The Windstream Enterprise Voice API (silhouette) is a REST-based web service with WebSocket support for real-time
-      events. It enables developers to make and receive calls, manage auto-attendants, control call routing, and
-      configure Unified Communications settings for OfficeSuite UC deployments. The API accepts and delivers content in
-      JSON format following HAL specifications.
-    humanURL: https://api.solutions.uniti.com/voice.html
-    baseURL: https://webadmin.windstreamenterprise.com/api
-    tags:
-      - Voice
-      - UC
-      - Calls
-      - Auto-attendants
-      - OfficeSuite
-    properties:
-      - type: Documentation
-        url: https://api.solutions.uniti.com/voice.html
-      - type: Portal
-        url: https://api.solutions.uniti.com/
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/openapi/windstream-voice-openapi.yml
-  - aid: windstream-holdings:windstream-contact-center-api
-    name: Windstream Enterprise Contact Center Services API
-    description: >-
-      The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center
-      operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure
-      tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event
-      streaming.
-    humanURL: https://api.solutions.uniti.com/ccs.html
-    baseURL: https://ccs.windstreamenterprise.com/6/v2/api
-    tags:
-      - Contact Center
-      - Calls
-      - Agents
-      - Queues
-      - UCaaS
-    properties:
-      - type: Documentation
-        url: https://api.solutions.uniti.com/ccs.html
-      - type: Portal
-        url: https://api.solutions.uniti.com/
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/openapi/windstream-contact-center-openapi.yml
+- aid: windstream-holdings:windstream-holdings-agents-api
+  name: Windstream Holdings agents API
+  description: Agent state management
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - agents
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-agents-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-auto-attendants-api
+  name: Windstream Holdings auto-attendants API
+  description: Auto-attendant configuration
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - auto-attendants
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-auto-attendants-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-calls-api
+  name: Windstream Holdings calls API
+  description: Call management and control
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - calls
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-calls-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-extensions-api
+  name: Windstream Holdings extensions API
+  description: Extension management
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - extensions
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-extensions-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-products-api
+  name: Windstream Holdings products API
+  description: Product catalog operations
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - products
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-products-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-roles-api
+  name: Windstream Holdings roles API
+  description: Role and permission management
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - roles
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-roles-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-system-api
+  name: Windstream Holdings system API
+  description: System-level operations
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - system
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-system-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-tenants-api
+  name: Windstream Holdings tenants API
+  description: Tenant management and configuration
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-tenants-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
+- aid: windstream-holdings:windstream-holdings-users-api
+  name: Windstream Holdings users API
+  description: User account management
+  humanURL: https://api.solutions.uniti.com/voice.html
+  baseURL: https://webadmin.windstreamenterprise.com/api
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/windstream-holdings-users-api-openapi.yml
+  - type: Documentation
+    url: https://api.solutions.uniti.com/voice.html
+  - type: Portal
+    url: https://api.solutions.uniti.com/
+  - type: Documentation
+    url: https://api.solutions.uniti.com/ccs.html
 common:
   - type: AgenticAccess
     url: agentic-access/windstream-holdings-agentic-access.yml
