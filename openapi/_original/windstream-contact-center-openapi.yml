@@ -1,0 +1,732 @@
+openapi: "3.0.3"
+info:
+  title: Windstream Enterprise Contact Center Services API
+  description: >-
+    The Windstream Enterprise Contact Center Services (CCS) API provides programmatic
+    access to contact center operations, enabling developers to route calls, web chats,
+    and text messages, manage agent states, configure tenants, and monitor queue activity.
+    The REST API is complemented by a WebSocket interface for real-time event streaming.
+  version: "2.0.0"
+  contact:
+    name: Windstream Enterprise Developer Support
+    url: https://api.solutions.uniti.com/
+  termsOfService: https://www.windstreamenterprise.com/legal/
+servers:
+  - url: https://{ccs_domain}/6/v2/api
+    description: CCS REST API
+    variables:
+      ccs_domain:
+        default: ccs.windstreamenterprise.com
+        description: CCS domain hostname
+
+tags:
+  - name: products
+    description: Product catalog operations
+  - name: tenants
+    description: Tenant management and configuration
+  - name: extensions
+    description: Extension management
+  - name: calls
+    description: Call management and control
+  - name: agents
+    description: Agent state management
+  - name: roles
+    description: Role and permission management
+
+paths:
+  /products/:
+    get:
+      operationId: listProducts
+      summary: List Products
+      description: Returns a list of all available contact center products.
+      tags:
+        - products
+      responses:
+        "200":
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "401":
+          description: Unauthorized
+
+  /roles/:
+    get:
+      operationId: listRoles
+      summary: List Roles
+      description: Returns a list of all roles and permissions available in the system.
+      tags:
+        - roles
+      responses:
+        "200":
+          description: List of roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Role"
+
+  /tenants:
+    get:
+      operationId: listTenants
+      summary: List Tenants
+      description: Returns a list of all tenants managed by the contact center.
+      tags:
+        - tenants
+      responses:
+        "200":
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tenant"
+
+  /tenants/{tenantUuid}:
+    get:
+      operationId: getTenant
+      summary: Get Tenant Details
+      description: Returns detailed configuration for a specific tenant.
+      tags:
+        - tenants
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Tenant details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tenant"
+        "404":
+          description: Tenant not found
+
+    post:
+      operationId: updateTenantProducts
+      summary: Update Tenant Products
+      description: Adds or removes product assignments for a tenant.
+      tags:
+        - tenants
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantProductUpdate"
+      responses:
+        "200":
+          description: Products updated
+
+    put:
+      operationId: updateTenantLimits
+      summary: Update Tenant Limits
+      description: Updates usage limits and license counts for a tenant.
+      tags:
+        - tenants
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantLimitsUpdate"
+      responses:
+        "200":
+          description: Tenant limits updated
+
+  /tenants/{tenantUuid}/roles:
+    get:
+      operationId: listTenantRoles
+      summary: List Tenant Roles
+      description: Returns all roles configured for a specific tenant.
+      tags:
+        - tenants
+        - roles
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of tenant roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Role"
+
+  /tenants/{tenantUuid}/acds:
+    get:
+      operationId: listTenantACDs
+      summary: List Tenant ACDs
+      description: Returns all Automatic Call Distributors (ACDs/queues) for a tenant.
+      tags:
+        - tenants
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of ACDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ACD"
+
+  /tenants/{tenantUuid}/presence-options:
+    get:
+      operationId: listPresenceOptions
+      summary: List Presence Options
+      description: Returns available presence/status options for agents in a tenant.
+      tags:
+        - tenants
+        - agents
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of presence options
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PresenceOption"
+
+  /tenants/{tenantUuid}/extensions:
+    get:
+      operationId: listTenantExtensions
+      summary: List Tenant Extensions
+      description: Returns all extensions configured for a specific tenant.
+      tags:
+        - tenants
+        - extensions
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of extensions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Extension"
+
+  /tenants/{tenantUuid}/extensions/{extensionUuid}:
+    put:
+      operationId: updateTenantExtension
+      summary: Update Tenant Extension
+      description: Updates configuration for a specific extension within a tenant.
+      tags:
+        - tenants
+        - extensions
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+        - name: extensionUuid
+          in: path
+          required: true
+          description: Extension UUID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtensionUpdate"
+      responses:
+        "200":
+          description: Extension updated
+
+  /tenants/{tenantUuid}/text-count:
+    get:
+      operationId: getTextMessageCount
+      summary: Get Text Message Count
+      description: Returns the SMS/MMS message count for a tenant.
+      tags:
+        - tenants
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: SMS/MMS count
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TextCount"
+
+    post:
+      operationId: resetTextMessageCount
+      summary: Reset Text Message Count
+      description: Resets the SMS/MMS message count for a tenant.
+      tags:
+        - tenants
+      parameters:
+        - name: tenantUuid
+          in: path
+          required: true
+          description: Tenant UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Count reset successfully
+
+  /calls:
+    get:
+      operationId: listCalls
+      summary: List Calls
+      description: Returns a list of active and recent calls in the contact center.
+      tags:
+        - calls
+      responses:
+        "200":
+          description: List of calls
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Call"
+
+  /calls/{callId}:
+    get:
+      operationId: getCall
+      summary: Get Call
+      description: Returns details for a specific call by its ID.
+      tags:
+        - calls
+      parameters:
+        - name: callId
+          in: path
+          required: true
+          description: Call identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Call details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Call"
+
+    post:
+      operationId: controlCall
+      summary: Control Call
+      description: >-
+        Executes a control action on an active call. Supported actions include
+        startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill.
+      tags:
+        - calls
+      parameters:
+        - name: callId
+          in: path
+          required: true
+          description: Call identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CallControlRequest"
+      responses:
+        "200":
+          description: Control action executed
+
+  /calls/filter:
+    get:
+      operationId: searchCalls
+      summary: Search Calls
+      description: Searches calls by various criteria including calling number, called number, and date range.
+      tags:
+        - calls
+      parameters:
+        - name: calling_number
+          in: query
+          description: Filter by calling party number
+          required: false
+          schema:
+            type: string
+        - name: called_number
+          in: query
+          description: Filter by called party number
+          required: false
+          schema:
+            type: string
+        - name: from_datetime
+          in: query
+          description: Start of date range filter (ISO 8601)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: to_datetime
+          in: query
+          description: End of date range filter (ISO 8601)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: time_z
+          in: query
+          description: Timezone for date range (e.g., America/New_York)
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Filtered list of calls
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Call"
+
+  /agent-state:
+    post:
+      operationId: updateAgentState
+      summary: Update Agent State
+      description: Updates the current agent's presence state (e.g., available, busy, on break).
+      tags:
+        - agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgentStateUpdate"
+      responses:
+        "200":
+          description: Agent state updated
+
+  /extensions/{extensionUuid}/agent-state:
+    get:
+      operationId: getAgentState
+      summary: Get Agent State
+      description: Returns the current presence/state of a specific agent extension.
+      tags:
+        - agents
+        - extensions
+      parameters:
+        - name: extensionUuid
+          in: path
+          required: true
+          description: Extension UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Agent state details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentState"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: "Bearer token authentication for CCS API"
+
+  schemas:
+    Product:
+      type: object
+      description: "A contact center product offering"
+      properties:
+        id:
+          type: string
+          description: "Product identifier"
+        name:
+          type: string
+          description: "Product name"
+        description:
+          type: string
+          description: "Product description"
+
+    Role:
+      type: object
+      description: "A role with associated permissions"
+      properties:
+        id:
+          type: string
+          description: "Role identifier"
+        name:
+          type: string
+          description: "Role name"
+          enum: [API, Agent Control, Call Control, Agent Events, Call Events, Inbound Queue Events]
+        description:
+          type: string
+          description: "Role description"
+
+    Tenant:
+      type: object
+      description: "A contact center tenant configuration"
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: "Tenant UUID"
+        name:
+          type: string
+          description: "Tenant name"
+        status:
+          type: string
+          description: "Tenant status"
+          enum: [active, inactive, suspended]
+        max_agents:
+          type: integer
+          description: "Maximum number of concurrent agents"
+        max_calls:
+          type: integer
+          description: "Maximum concurrent calls"
+
+    TenantProductUpdate:
+      type: object
+      description: "Request to update tenant product assignments"
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+          description: "Product IDs to add"
+        remove:
+          type: array
+          items:
+            type: string
+          description: "Product IDs to remove"
+
+    TenantLimitsUpdate:
+      type: object
+      description: "Request to update tenant limits"
+      properties:
+        max_agents:
+          type: integer
+          description: "New maximum agent count"
+        max_calls:
+          type: integer
+          description: "New maximum concurrent calls"
+        sms_limit:
+          type: integer
+          description: "SMS message limit"
+
+    ACD:
+      type: object
+      description: "An Automatic Call Distributor (queue)"
+      properties:
+        id:
+          type: string
+          description: "ACD identifier"
+        name:
+          type: string
+          description: "Queue name"
+        tenant_uuid:
+          type: string
+          description: "Tenant UUID"
+        max_queue_length:
+          type: integer
+          description: "Maximum number of calls in queue"
+        current_queue_length:
+          type: integer
+          description: "Current number of calls waiting"
+        agents_available:
+          type: integer
+          description: "Number of available agents"
+
+    PresenceOption:
+      type: object
+      description: "An agent presence/status option"
+      properties:
+        id:
+          type: string
+          description: "Presence option identifier"
+        name:
+          type: string
+          description: "Display name (e.g., Available, Busy, On Break)"
+        available_for_calls:
+          type: boolean
+          description: "Whether agent is available to receive calls in this state"
+
+    Extension:
+      type: object
+      description: "A contact center extension"
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: "Extension UUID"
+        number:
+          type: string
+          description: "Extension number"
+        name:
+          type: string
+          description: "Display name"
+        tenant_uuid:
+          type: string
+          description: "Tenant UUID"
+
+    ExtensionUpdate:
+      type: object
+      description: "Extension update request"
+      properties:
+        name:
+          type: string
+          description: "New display name"
+        role:
+          type: string
+          description: "Updated role assignment"
+
+    TextCount:
+      type: object
+      description: "SMS/MMS message count"
+      properties:
+        sms_count:
+          type: integer
+          description: "Number of SMS messages sent"
+        mms_count:
+          type: integer
+          description: "Number of MMS messages sent"
+        period_start:
+          type: string
+          format: date-time
+          description: "Start of the counting period"
+
+    Call:
+      type: object
+      description: "A call record in the contact center"
+      properties:
+        id:
+          type: string
+          description: "Call identifier"
+        calling_number:
+          type: string
+          description: "Calling party number"
+        called_number:
+          type: string
+          description: "Called party number"
+        state:
+          type: string
+          description: "Current call state"
+          enum: [alerting, connected, held, queued, completed]
+        tenant_uuid:
+          type: string
+          description: "Tenant UUID"
+        started_at:
+          type: string
+          format: date-time
+          description: "Call start time"
+        duration:
+          type: integer
+          description: "Call duration in seconds"
+
+    CallControlRequest:
+      type: object
+      description: "Call control action request"
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          description: "Control action to execute"
+          enum: [startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill]
+
+    AgentState:
+      type: object
+      description: "Current agent state/presence"
+      properties:
+        extension_uuid:
+          type: string
+          description: "Extension UUID"
+        state:
+          type: string
+          description: "Current presence state"
+        available_for_calls:
+          type: boolean
+          description: "Whether agent can receive calls"
+        updated_at:
+          type: string
+          format: date-time
+          description: "Timestamp of last state change"
+
+    AgentStateUpdate:
+      type: object
+      description: "Agent state update request"
+      required:
+        - state
+      properties:
+        state:
+          type: string
+          description: "New presence state"
+        reason:
+          type: string
+          description: "Reason for state change"

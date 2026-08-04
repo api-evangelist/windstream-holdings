@@ -1,0 +1,30 @@
+{
+  "provider": "windstream-holdings",
+  "sources": [
+    "windstream-holdings-agents-api-openapi.yml",
+    "windstream-holdings-auto-attendants-api-openapi.yml",
+    "windstream-holdings-calls-api-openapi.yml",
+    "windstream-holdings-extensions-api-openapi.yml",
+    "windstream-holdings-products-api-openapi.yml",
+    "windstream-holdings-roles-api-openapi.yml",
+    "windstream-holdings-system-api-openapi.yml",
+    "windstream-holdings-tenants-api-openapi.yml",
+    "windstream-holdings-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "windstream-holdings-agents-api-openapi.yml",
+    "windstream-holdings-auto-attendants-api-openapi.yml",
+    "windstream-holdings-calls-api-openapi.yml",
+    "windstream-holdings-extensions-api-openapi.yml",
+    "windstream-holdings-products-api-openapi.yml",
+    "windstream-holdings-roles-api-openapi.yml",
+    "windstream-holdings-system-api-openapi.yml",
+    "windstream-holdings-tenants-api-openapi.yml",
+    "windstream-holdings-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
