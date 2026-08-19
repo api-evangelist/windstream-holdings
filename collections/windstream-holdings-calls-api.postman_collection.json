@@ -1,0 +1,803 @@
+{
+  "item": [
+    {
+      "id": "f3f3e06b-6080-42c6-883e-30a4d442f863",
+      "name": "calls",
+      "description": {
+        "content": "Call management and control",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96cb1642-51e1-4934-a1f1-7c6502fc935f",
+          "name": "List Calls",
+          "request": {
+            "name": "List Calls",
+            "description": {
+              "content": "Returns a list of active and recent calls in the contact center.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c82bde7e-731e-4268-9404-9bb06154c738",
+              "name": "List of calls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"connected\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"1983-10-21T20:43:46.192Z\",\n    \"duration\": 8267\n  },\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"held\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"1960-04-09T09:39:26.894Z\",\n    \"duration\": 8058\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88cecc18-5f5d-4f15-a50f-2254805bae2e",
+          "name": "Get Call",
+          "request": {
+            "name": "Get Call",
+            "description": {
+              "content": "Returns details for a specific call by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Call identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af025bc0-6efd-4270-8b80-500ebb389ade",
+              "name": "Call details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Call identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"calling_number\": \"string\",\n  \"called_number\": \"string\",\n  \"state\": \"held\",\n  \"tenant_uuid\": \"string\",\n  \"started_at\": \"2011-06-25T18:36:45.056Z\",\n  \"duration\": 4473\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "532d3de4-2abb-4a4b-9e8d-b050c4d8d8ec",
+          "name": "Control Call",
+          "request": {
+            "name": "Control Call",
+            "description": {
+              "content": "Executes a control action on an active call. Supported actions include startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Call identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8281b748-dae1-4a59-8320-d3e17cf56456",
+              "name": "Control action executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Call identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2004372f-899e-4aa5-9749-bd63379bc239",
+          "name": "Terminate Call",
+          "request": {
+            "name": "Terminate Call",
+            "description": {
+              "content": "Terminates an active call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                ":callId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "callId",
+                  "description": "(Required) Unique call identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "828833ab-9896-4ad5-940b-a8cce719df1c",
+              "name": "Call terminated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "873145bb-fa49-497e-92f9-aadcf6628dc9",
+              "name": "Call not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    ":callId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "callId",
+                      "description": "(Required) Unique call identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "073f2e1d-9c61-42f0-a5f4-dfaf6c409c44",
+          "name": "Search Calls",
+          "request": {
+            "name": "Search Calls",
+            "description": {
+              "content": "Searches calls by various criteria including calling number, called number, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calling_number",
+                  "value": "<string>",
+                  "description": "Filter by calling party number"
+                },
+                {
+                  "disabled": false,
+                  "key": "called_number",
+                  "value": "<string>",
+                  "description": "Filter by called party number"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_datetime",
+                  "value": "<dateTime>",
+                  "description": "Start of date range filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_datetime",
+                  "value": "<dateTime>",
+                  "description": "End of date range filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_z",
+                  "value": "<string>",
+                  "description": "Timezone for date range (e.g., America/New_York)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d12ffd4-9db2-4f71-b95f-51ec8c6e1ba2",
+              "name": "Filtered list of calls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calling_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "called_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from_datetime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to_datetime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "time_z",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"connected\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"1983-10-21T20:43:46.192Z\",\n    \"duration\": 8267\n  },\n  {\n    \"id\": \"string\",\n    \"calling_number\": \"string\",\n    \"called_number\": \"string\",\n    \"state\": \"held\",\n    \"tenant_uuid\": \"string\",\n    \"started_at\": \"1960-04-09T09:39:26.894Z\",\n    \"duration\": 8058\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32a12f9b-2c95-4c67-9b72-c73a52de7c13",
+          "name": "Make Outbound Call",
+          "request": {
+            "name": "Make Outbound Call",
+            "description": {
+              "content": "Initiates an outbound call from a specified extension to a destination number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calls",
+                "outbound"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e32416c-c02b-4fa2-ad90-d486924fa147",
+              "name": "Outbound call initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "outbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"state\": \"connected\",\n  \"caller\": \"string\",\n  \"callee\": \"string\",\n  \"direction\": \"outbound\",\n  \"duration\": 9980,\n  \"startedAt\": \"1973-06-26T05:52:37.395Z\",\n  \"_links\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7301bcca-26fa-4be8-99f3-db07cde4a464",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "outbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "764e282b-872e-4a28-8cdc-f7ffe97380a0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calls",
+                    "outbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"caller_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "CCS domain hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "ccs.windstreamenterprise.com",
+      "key": "ccs_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ccs_domain}}/6/v2/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2c2143ff-9c31-48af-861f-10b50885edc0",
+    "name": "Windstream Enterprise Contact Center Services agents calls API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.\n\nContact Support:\n Name: Windstream Enterprise Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

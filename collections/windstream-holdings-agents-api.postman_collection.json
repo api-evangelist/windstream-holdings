@@ -1,0 +1,340 @@
+{
+  "item": [
+    {
+      "id": "89eea39a-e538-4619-8a0f-8f07571f8332",
+      "name": "agents",
+      "description": {
+        "content": "Agent state management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bdea7e8-8d8e-4ac0-9775-828abc1d6868",
+          "name": "List Presence Options",
+          "request": {
+            "name": "List Presence Options",
+            "description": {
+              "content": "Returns available presence/status options for agents in a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenantUuid",
+                "presence-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUuid",
+                  "description": "(Required) Tenant UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed8b6100-fe5d-4b87-95e2-36dec48c5c79",
+              "name": "List of presence options",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenantUuid",
+                    "presence-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUuid",
+                      "description": "(Required) Tenant UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"available_for_calls\": false\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"available_for_calls\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b692cb5-6cb6-475b-8323-2e629bd68631",
+          "name": "Update Agent State",
+          "request": {
+            "name": "Update Agent State",
+            "description": {
+              "content": "Updates the current agent's presence state (e.g., available, busy, on break).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent-state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7cba450-7d5f-41b8-9b9e-ed7575e32b9f",
+              "name": "Agent state updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent-state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddc13c60-71f8-4d15-a991-585a5b1b04ad",
+          "name": "Get Agent State",
+          "request": {
+            "name": "Get Agent State",
+            "description": {
+              "content": "Returns the current presence/state of a specific agent extension.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                ":extensionUuid",
+                "agent-state"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "extensionUuid",
+                  "description": "(Required) Extension UUID"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a33980c0-cd2d-4b66-9996-64a91fdcac58",
+              "name": "Agent state details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    ":extensionUuid",
+                    "agent-state"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "extensionUuid",
+                      "description": "(Required) Extension UUID"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"extension_uuid\": \"string\",\n  \"state\": \"string\",\n  \"available_for_calls\": false,\n  \"updated_at\": \"1948-10-21T15:15:00.646Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "CCS domain hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "ccs.windstreamenterprise.com",
+      "key": "ccs_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ccs_domain}}/6/v2/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6332570e-65ab-4409-8590-e707e46e6634",
+    "name": "Windstream Enterprise Contact Center Services agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.\n\nContact Support:\n Name: Windstream Enterprise Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

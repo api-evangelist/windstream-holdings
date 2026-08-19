@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windstream Enterprise Contact Center Services agents auto-attendants API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "auto-attendants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Auto-attendants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/auto-attendants"
+          },
+          "docs": "Returns a list of all auto-attendants configured in the tenant."
+        },
+        {
+          "info": {
+            "name": "Create Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/auto-attendants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new auto-attendant with defined menu options and routing rules."
+        },
+        {
+          "info": {
+            "name": "Get Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/auto-attendants/:attendantId",
+            "params": [
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "path",
+                "description": "Auto-attendant identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves configuration details of a specific auto-attendant."
+        },
+        {
+          "info": {
+            "name": "Update Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ccs_domain}/6/v2/api/auto-attendants/:attendantId",
+            "params": [
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "path",
+                "description": "Auto-attendant identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing auto-attendant."
+        },
+        {
+          "info": {
+            "name": "Delete Auto-attendant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ccs_domain}/6/v2/api/auto-attendants/:attendantId",
+            "params": [
+              {
+                "name": "attendantId",
+                "value": "",
+                "type": "path",
+                "description": "Auto-attendant identifier"
+              }
+            ]
+          },
+          "docs": "Removes an auto-attendant configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

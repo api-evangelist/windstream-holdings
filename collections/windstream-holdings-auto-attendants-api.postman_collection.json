@@ -1,0 +1,529 @@
+{
+  "item": [
+    {
+      "id": "d895e66c-b1a0-417f-bb03-c8cd5d5dcee5",
+      "name": "auto-attendants",
+      "description": {
+        "content": "Auto-attendant configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "526cdabb-04c2-4f02-819b-39ae3f55702d",
+          "name": "List Auto-attendants",
+          "request": {
+            "name": "List Auto-attendants",
+            "description": {
+              "content": "Returns a list of all auto-attendants configured in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03a961ea-592a-4436-9d7e-8e9b85414866",
+              "name": "List of auto-attendants",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"greeting\": \"string\",\n    \"menu_options\": [\n      {\n        \"digit\": \"string\",\n        \"action\": \"transfer\",\n        \"destination\": \"string\"\n      },\n      {\n        \"digit\": \"string\",\n        \"action\": \"disconnect\",\n        \"destination\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"greeting\": \"string\",\n    \"menu_options\": [\n      {\n        \"digit\": \"string\",\n        \"action\": \"transfer\",\n        \"destination\": \"string\"\n      },\n      {\n        \"digit\": \"string\",\n        \"action\": \"transfer\",\n        \"destination\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1be7801-b16f-47fc-8a02-d820cd314091",
+          "name": "Create Auto-attendant",
+          "request": {
+            "name": "Create Auto-attendant",
+            "description": {
+              "content": "Creates a new auto-attendant with defined menu options and routing rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70f9d7ce-d631-4c4a-b6a8-89ad5c213086",
+              "name": "Auto-attendant created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"greeting\": \"string\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83d73d20-292d-466e-bd73-10aab510e252",
+          "name": "Get Auto-attendant",
+          "request": {
+            "name": "Get Auto-attendant",
+            "description": {
+              "content": "Retrieves configuration details of a specific auto-attendant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants",
+                ":attendantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attendantId",
+                  "description": "(Required) Auto-attendant identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab5f2331-40ce-4bbd-be82-a2dea8c4f4ce",
+              "name": "Auto-attendant details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants",
+                    ":attendantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attendantId",
+                      "description": "(Required) Auto-attendant identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"greeting\": \"string\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29425215-9c15-4c36-b927-58d2cfbf0b4f",
+          "name": "Update Auto-attendant",
+          "request": {
+            "name": "Update Auto-attendant",
+            "description": {
+              "content": "Updates the configuration of an existing auto-attendant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants",
+                ":attendantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attendantId",
+                  "description": "(Required) Auto-attendant identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21665fd4-d1c4-43a1-847b-5cc15b8847a9",
+              "name": "Auto-attendant updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants",
+                    ":attendantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attendantId",
+                      "description": "(Required) Auto-attendant identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"greeting\": \"<string>\",\n  \"menu_options\": [\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    },\n    {\n      \"digit\": \"<string>\",\n      \"action\": \"<string>\",\n      \"destination\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd07a0a7-bd0a-4212-a4c3-710297b8e795",
+          "name": "Delete Auto-attendant",
+          "request": {
+            "name": "Delete Auto-attendant",
+            "description": {
+              "content": "Removes an auto-attendant configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-attendants",
+                ":attendantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attendantId",
+                  "description": "(Required) Auto-attendant identifier"
+                },
+                {
+                  "description": "CCS domain hostname",
+                  "type": "any",
+                  "value": "{{ccs_domain}}",
+                  "key": "ccs_domain"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ba5bde6-7676-4019-9c8c-bd42ffc1299a",
+              "name": "Auto-attendant deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-attendants",
+                    ":attendantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attendantId",
+                      "description": "(Required) Auto-attendant identifier"
+                    },
+                    {
+                      "description": "CCS domain hostname",
+                      "type": "any",
+                      "value": "{{ccs_domain}}",
+                      "key": "ccs_domain"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "CCS domain hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "ccs.windstreamenterprise.com",
+      "key": "ccs_domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{ccs_domain}}/6/v2/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "359e7bf6-d557-42b6-9484-3480ac595a74",
+    "name": "Windstream Enterprise Contact Center Services agents auto-attendants API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.\n\nContact Support:\n Name: Windstream Enterprise Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

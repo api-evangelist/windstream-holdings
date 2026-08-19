@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windstream Enterprise Contact Center Services agents roles API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/roles/"
+          },
+          "docs": "Returns a list of all roles and permissions available in the system."
+        },
+        {
+          "info": {
+            "name": "List Tenant Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/roles",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns all roles configured for a specific tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

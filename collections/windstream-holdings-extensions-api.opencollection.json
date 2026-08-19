@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windstream Enterprise Contact Center Services agents extensions API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "extensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tenant Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/extensions",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns all extensions configured for a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Update Tenant Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/extensions/:extensionUuid",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              },
+              {
+                "name": "extensionUuid",
+                "value": "",
+                "type": "path",
+                "description": "Extension UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates configuration for a specific extension within a tenant."
+        },
+        {
+          "info": {
+            "name": "Get Agent State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/extensions/:extensionUuid/agent-state",
+            "params": [
+              {
+                "name": "extensionUuid",
+                "value": "",
+                "type": "path",
+                "description": "Extension UUID"
+              }
+            ]
+          },
+          "docs": "Returns the current presence/state of a specific agent extension."
+        },
+        {
+          "info": {
+            "name": "List Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/extensions",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID to filter extensions"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              }
+            ]
+          },
+          "docs": "Returns a list of all extensions in the tenant."
+        },
+        {
+          "info": {
+            "name": "Get Extension Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "Extension identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific extension."
+        },
+        {
+          "info": {
+            "name": "Update Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{ccs_domain}/6/v2/api/extensions/:extensionId",
+            "params": [
+              {
+                "name": "extensionId",
+                "value": "",
+                "type": "path",
+                "description": "Extension identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing extension."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

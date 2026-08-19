@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windstream Enterprise Contact Center Services agents API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Presence Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/tenants/:tenantUuid/presence-options",
+            "params": [
+              {
+                "name": "tenantUuid",
+                "value": "",
+                "type": "path",
+                "description": "Tenant UUID"
+              }
+            ]
+          },
+          "docs": "Returns available presence/status options for agents in a tenant."
+        },
+        {
+          "info": {
+            "name": "Update Agent State",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/agent-state",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the current agent's presence state (e.g., available, busy, on break)."
+        },
+        {
+          "info": {
+            "name": "Get Agent State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/extensions/:extensionUuid/agent-state",
+            "params": [
+              {
+                "name": "extensionUuid",
+                "value": "",
+                "type": "path",
+                "description": "Extension UUID"
+              }
+            ]
+          },
+          "docs": "Returns the current presence/state of a specific agent extension."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

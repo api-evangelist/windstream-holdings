@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windstream Enterprise Contact Center Services agents calls API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/calls"
+          },
+          "docs": "Returns a list of active and recent calls in the contact center."
+        },
+        {
+          "info": {
+            "name": "Get Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Call identifier"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific call by its ID."
+        },
+        {
+          "info": {
+            "name": "Control Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Call identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a control action on an active call. Supported actions include startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill."
+        },
+        {
+          "info": {
+            "name": "Terminate Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{ccs_domain}/6/v2/api/calls/:callId",
+            "params": [
+              {
+                "name": "callId",
+                "value": "",
+                "type": "path",
+                "description": "Unique call identifier"
+              }
+            ]
+          },
+          "docs": "Terminates an active call."
+        },
+        {
+          "info": {
+            "name": "Search Calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{ccs_domain}/6/v2/api/calls/filter",
+            "params": [
+              {
+                "name": "calling_number",
+                "value": "",
+                "type": "query",
+                "description": "Filter by calling party number"
+              },
+              {
+                "name": "called_number",
+                "value": "",
+                "type": "query",
+                "description": "Filter by called party number"
+              },
+              {
+                "name": "from_datetime",
+                "value": "",
+                "type": "query",
+                "description": "Start of date range filter (ISO 8601)"
+              },
+              {
+                "name": "to_datetime",
+                "value": "",
+                "type": "query",
+                "description": "End of date range filter (ISO 8601)"
+              },
+              {
+                "name": "time_z",
+                "value": "",
+                "type": "query",
+                "description": "Timezone for date range (e.g., America/New_York)"
+              }
+            ]
+          },
+          "docs": "Searches calls by various criteria including calling number, called number, and date range."
+        },
+        {
+          "info": {
+            "name": "Make Outbound Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{ccs_domain}/6/v2/api/calls/outbound",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an outbound call from a specified extension to a destination number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
