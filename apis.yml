@@ -27,6 +27,16 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/windstream
 tags:
   - Broadband
   - Contact Center
+  - Managed Service
+  - Network Communications
+  - SD-WAN
+  - Telecom
+  - UCaaS
+  - Unified Communications
+  - Fortune 500
+tags_raw:
+  - Broadband
+  - Contact Center
   - Managed Services
   - Network Communications
   - SD-WAN
@@ -45,6 +55,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - Agents
+  tags_raw:
   - agents
   properties:
   - type: OpenAPI
@@ -77,6 +89,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - Calls
+  tags_raw:
   - calls
   properties:
   - type: OpenAPI
@@ -93,6 +107,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - Extensions
+  tags_raw:
   - extensions
   properties:
   - type: OpenAPI
@@ -109,6 +125,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - Product
+  tags_raw:
   - products
   properties:
   - type: OpenAPI
@@ -125,6 +143,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - Roles
+  tags_raw:
   - roles
   properties:
   - type: OpenAPI
@@ -141,6 +161,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - System
+  tags_raw:
   - system
   properties:
   - type: OpenAPI
@@ -157,6 +179,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - Tenants
+  tags_raw:
   - tenants
   properties:
   - type: OpenAPI
@@ -173,6 +197,8 @@ apis:
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
