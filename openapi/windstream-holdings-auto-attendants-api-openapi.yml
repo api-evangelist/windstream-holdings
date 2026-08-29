@@ -1,19 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Windstream Enterprise Contact Center Services agents auto-attendants API
-  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
-  version: 2.0.0
+  title: Windstream Enterprise Voice Auto Attendants API
+  description: The Windstream Enterprise Voice API (silhouette) is a REST-based web service with WebSocket support for real-time events. It enables developers to make and receive calls, manage auto-attendants, control call routing, and configure UC (Unified Communications) settings for OfficeSuite UC deployments. The API accepts and delivers content in JSON format and follows HAL (Hypertext Application Language) specifications for resource linking.
+  version: 1.0.0
   contact:
     name: Windstream Enterprise Developer Support
     url: https://api.solutions.uniti.com/
   termsOfService: https://www.windstreamenterprise.com/legal/
 servers:
-- url: https://{ccs_domain}/6/v2/api
-  description: CCS REST API
+- url: https://{webadmin}/api
+  description: Voice API server
   variables:
-    ccs_domain:
-      default: ccs.windstreamenterprise.com
-      description: CCS domain hostname
+    webadmin:
+      default: webadmin.windstreamenterprise.com
+      description: WebAdmin server hostname
+security:
+- basicAuth: []
 tags:
 - name: auto-attendants
   description: Auto-attendant configuration
@@ -114,24 +116,6 @@ paths:
           description: Auto-attendant deleted
 components:
   schemas:
-    MenuOption:
-      type: object
-      description: A single DTMF menu option
-      properties:
-        digit:
-          type: string
-          description: 'DTMF digit (0-9, *, #)'
-        action:
-          type: string
-          description: Action to take when digit is pressed
-          enum:
-          - transfer
-          - voicemail
-          - repeat_menu
-          - disconnect
-        destination:
-          type: string
-          description: Transfer destination if action is transfer
     AutoAttendantCreate:
       type: object
       description: Request body for creating or updating an auto-attendant
@@ -166,8 +150,26 @@ components:
           description: DTMF menu options
           items:
             $ref: '#/components/schemas/MenuOption'
+    MenuOption:
+      type: object
+      description: A single DTMF menu option
+      properties:
+        digit:
+          type: string
+          description: 'DTMF digit (0-9, *, #)'
+        action:
+          type: string
+          description: Action to take when digit is pressed
+          enum:
+          - transfer
+          - voicemail
+          - repeat_menu
+          - disconnect
+        destination:
+          type: string
+          description: Transfer destination if action is transfer
   securitySchemes:
-    bearerAuth:
+    basicAuth:
       type: http
-      scheme: bearer
-      description: Bearer token authentication for CCS API
+      scheme: basic
+      description: 'HTTP Basic Authentication using extension@tenantId credentials. Username formats: ext@tenantId, ext@tenantId.ID, ext@tenantDID.DID, ext@tenantURI.URI'

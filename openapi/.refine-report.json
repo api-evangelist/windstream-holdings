@@ -1,30 +1,39 @@
 {
   "provider": "windstream-holdings",
   "sources": [
-    "windstream-holdings-agents-api-openapi.yml",
-    "windstream-holdings-auto-attendants-api-openapi.yml",
-    "windstream-holdings-calls-api-openapi.yml",
-    "windstream-holdings-extensions-api-openapi.yml",
-    "windstream-holdings-products-api-openapi.yml",
-    "windstream-holdings-roles-api-openapi.yml",
-    "windstream-holdings-system-api-openapi.yml",
-    "windstream-holdings-tenants-api-openapi.yml",
-    "windstream-holdings-users-api-openapi.yml"
+    "_original/windstream-contact-center-openapi.yml",
+    "_original/windstream-voice-openapi.yml"
   ],
   "outputs": [
     "windstream-holdings-agents-api-openapi.yml",
-    "windstream-holdings-auto-attendants-api-openapi.yml",
     "windstream-holdings-calls-api-openapi.yml",
     "windstream-holdings-extensions-api-openapi.yml",
     "windstream-holdings-products-api-openapi.yml",
     "windstream-holdings-roles-api-openapi.yml",
-    "windstream-holdings-system-api-openapi.yml",
     "windstream-holdings-tenants-api-openapi.yml",
+    "windstream-holdings-auto-attendants-api-openapi.yml",
+    "windstream-holdings-system-api-openapi.yml",
     "windstream-holdings-users-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "windstream-contact-center-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "windstream-voice-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'calls' spans 2 source specs (windstream-contact-center-openapi.yml, windstream-voice-openapi.yml): per-path servers applied",
+    "tag 'extensions' spans 2 source specs (windstream-contact-center-openapi.yml, windstream-voice-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "windstream-holdings-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-auto-attendants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-calls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-extensions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-system-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-tenants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "windstream-holdings-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

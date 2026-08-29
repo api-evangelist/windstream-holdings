@@ -1,12 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Windstream Enterprise Contact Center Services agents calls API
-  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
-  version: 2.0.0
+  title: Windstream Holdings Calls API
   contact:
     name: Windstream Enterprise Developer Support
     url: https://api.solutions.uniti.com/
   termsOfService: https://www.windstreamenterprise.com/legal/
+  version: '1.0'
+  description: 'Operations tagged calls across 2 of this provider''s published API definitions: windstream-contact-center-openapi.yml, windstream-voice-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{ccs_domain}/6/v2/api
   description: CCS REST API
@@ -14,6 +14,12 @@ servers:
     ccs_domain:
       default: ccs.windstreamenterprise.com
       description: CCS domain hostname
+- url: https://{webadmin}/api
+  description: Voice API server
+  variables:
+    webadmin:
+      default: webadmin.windstreamenterprise.com
+      description: WebAdmin server hostname
 tags:
 - name: calls
   description: Call management and control
@@ -34,6 +40,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Call'
+    servers:
+    - url: https://{ccs_domain}/6/v2/api
+      description: CCS REST API
+      variables:
+        ccs_domain:
+          default: ccs.windstreamenterprise.com
+          description: CCS domain hostname
   /calls/{callId}:
     get:
       operationId: getCall
@@ -95,6 +108,13 @@ paths:
           description: Call terminated successfully
         '404':
           description: Call not found
+    servers:
+    - url: https://{ccs_domain}/6/v2/api
+      description: CCS REST API
+      variables:
+        ccs_domain:
+          default: ccs.windstreamenterprise.com
+          description: CCS domain hostname
   /calls/filter:
     get:
       operationId: searchCalls
@@ -144,6 +164,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Call'
+    servers:
+    - url: https://{ccs_domain}/6/v2/api
+      description: CCS REST API
+      variables:
+        ccs_domain:
+          default: ccs.windstreamenterprise.com
+          description: CCS domain hostname
   /calls/outbound:
     post:
       operationId: makeOutboundCall
@@ -168,6 +195,15 @@ paths:
           description: Invalid request
         '403':
           description: Forbidden
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://{webadmin}/api
+      description: Voice API server
+      variables:
+        webadmin:
+          default: webadmin.windstreamenterprise.com
+          description: WebAdmin server hostname
 components:
   schemas:
     CallControlRequest:
@@ -186,6 +222,38 @@ components:
           - wait_transfer
           - wait_redirect
           - wait_kill
+    Call:
+      type: object
+      description: A call record in the contact center
+      properties:
+        id:
+          type: string
+          description: Call identifier
+        calling_number:
+          type: string
+          description: Calling party number
+        called_number:
+          type: string
+          description: Called party number
+        state:
+          type: string
+          description: Current call state
+          enum:
+          - alerting
+          - connected
+          - held
+          - queued
+          - completed
+        tenant_uuid:
+          type: string
+          description: Tenant UUID
+        started_at:
+          type: string
+          format: date-time
+          description: Call start time
+        duration:
+          type: integer
+          description: Call duration in seconds
     OutboundCallRequest:
       type: object
       description: Request to initiate an outbound call
@@ -202,6 +270,36 @@ components:
         caller_id:
           type: string
           description: Caller ID to present to the called party
+    CallControlResponse:
+      type: object
+      description: Response from a call control action
+      properties:
+        success:
+          type: boolean
+          description: Whether the action was successful
+        message:
+          type: string
+          description: Result message
+    CallControlRequest_2:
+      type: object
+      description: Request body for call control actions
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: Call control action to execute
+          enum:
+          - transfer
+          - hold
+          - unhold
+          - conference
+          - record
+          - stop_record
+          - terminate
+        destination:
+          type: string
+          description: Transfer destination (required for transfer action)
     Call_2:
       type: object
       description: An active or completed phone call
@@ -239,40 +337,15 @@ components:
         _links:
           type: object
           description: HAL links for call actions
-    Call:
-      type: object
-      description: A call record in the contact center
-      properties:
-        id:
-          type: string
-          description: Call identifier
-        calling_number:
-          type: string
-          description: Calling party number
-        called_number:
-          type: string
-          description: Called party number
-        state:
-          type: string
-          description: Current call state
-          enum:
-          - alerting
-          - connected
-          - held
-          - queued
-          - completed
-        tenant_uuid:
-          type: string
-          description: Tenant UUID
-        started_at:
-          type: string
-          format: date-time
-          description: Call start time
-        duration:
-          type: integer
-          description: Call duration in seconds
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Bearer token authentication for CCS API
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using extension@tenantId credentials. Username formats: ext@tenantId, ext@tenantId.ID, ext@tenantDID.DID, ext@tenantURI.URI'
+x-refined-from:
+- windstream-contact-center-openapi.yml
+- windstream-voice-openapi.yml

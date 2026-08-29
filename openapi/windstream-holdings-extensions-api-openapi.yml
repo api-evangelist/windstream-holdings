@@ -1,12 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Windstream Enterprise Contact Center Services agents extensions API
-  description: The Windstream Enterprise Contact Center Services (CCS) API provides programmatic access to contact center operations, enabling developers to route calls, web chats, and text messages, manage agent states, configure tenants, and monitor queue activity. The REST API is complemented by a WebSocket interface for real-time event streaming.
-  version: 2.0.0
+  title: Windstream Holdings Extensions API
   contact:
     name: Windstream Enterprise Developer Support
     url: https://api.solutions.uniti.com/
   termsOfService: https://www.windstreamenterprise.com/legal/
+  version: '1.0'
+  description: 'Operations tagged extensions across 2 of this provider''s published API definitions: windstream-contact-center-openapi.yml, windstream-voice-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{ccs_domain}/6/v2/api
   description: CCS REST API
@@ -14,6 +14,12 @@ servers:
     ccs_domain:
       default: ccs.windstreamenterprise.com
       description: CCS domain hostname
+- url: https://{webadmin}/api
+  description: Voice API server
+  variables:
+    webadmin:
+      default: webadmin.windstreamenterprise.com
+      description: WebAdmin server hostname
 tags:
 - name: extensions
   description: Extension management
@@ -42,6 +48,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Extension'
+    servers:
+    - url: https://{ccs_domain}/6/v2/api
+      description: CCS REST API
+      variables:
+        ccs_domain:
+          default: ccs.windstreamenterprise.com
+          description: CCS domain hostname
   /tenants/{tenantUuid}/extensions/{extensionUuid}:
     put:
       operationId: updateTenantExtension
@@ -73,6 +86,13 @@ paths:
       responses:
         '200':
           description: Extension updated
+    servers:
+    - url: https://{ccs_domain}/6/v2/api
+      description: CCS REST API
+      variables:
+        ccs_domain:
+          default: ccs.windstreamenterprise.com
+          description: CCS domain hostname
   /extensions/{extensionUuid}/agent-state:
     get:
       operationId: getAgentState
@@ -95,6 +115,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentState'
+    servers:
+    - url: https://{ccs_domain}/6/v2/api
+      description: CCS REST API
+      variables:
+        ccs_domain:
+          default: ccs.windstreamenterprise.com
+          description: CCS domain hostname
   /extensions:
     get:
       operationId: listExtensions
@@ -130,6 +157,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Extension_2'
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://{webadmin}/api
+      description: Voice API server
+      variables:
+        webadmin:
+          default: webadmin.windstreamenterprise.com
+          description: WebAdmin server hostname
   /extensions/{extensionId}:
     get:
       operationId: getExtension
@@ -153,6 +189,8 @@ paths:
                 $ref: '#/components/schemas/Extension_2'
         '404':
           description: Extension not found
+      security:
+      - basicAuth: []
     put:
       operationId: updateExtension
       summary: Update Extension
@@ -179,21 +217,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Extension_2'
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://{webadmin}/api
+      description: Voice API server
+      variables:
+        webadmin:
+          default: webadmin.windstreamenterprise.com
+          description: WebAdmin server hostname
 components:
   schemas:
-    ExtensionUpdate_2:
+    AgentState:
       type: object
-      description: Extension update request body
+      description: Current agent state/presence
       properties:
+        extension_uuid:
+          type: string
+          description: Extension UUID
+        state:
+          type: string
+          description: Current presence state
+        available_for_calls:
+          type: boolean
+          description: Whether agent can receive calls
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last state change
+    Extension:
+      type: object
+      description: A contact center extension
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Extension UUID
+        number:
+          type: string
+          description: Extension number
         name:
           type: string
-          description: New display name
-        forward_to:
+          description: Display name
+        tenant_uuid:
           type: string
-          description: Call forwarding destination
-        do_not_disturb:
-          type: boolean
-          description: Enable/disable do not disturb
+          description: Tenant UUID
     ExtensionUpdate:
       type: object
       description: Extension update request
@@ -236,42 +304,28 @@ components:
           - active
           - inactive
           - suspended
-    Extension:
+    ExtensionUpdate_2:
       type: object
-      description: A contact center extension
+      description: Extension update request body
       properties:
-        uuid:
-          type: string
-          format: uuid
-          description: Extension UUID
-        number:
-          type: string
-          description: Extension number
         name:
           type: string
-          description: Display name
-        tenant_uuid:
+          description: New display name
+        forward_to:
           type: string
-          description: Tenant UUID
-    AgentState:
-      type: object
-      description: Current agent state/presence
-      properties:
-        extension_uuid:
-          type: string
-          description: Extension UUID
-        state:
-          type: string
-          description: Current presence state
-        available_for_calls:
+          description: Call forwarding destination
+        do_not_disturb:
           type: boolean
-          description: Whether agent can receive calls
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp of last state change
+          description: Enable/disable do not disturb
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Bearer token authentication for CCS API
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication using extension@tenantId credentials. Username formats: ext@tenantId, ext@tenantId.ID, ext@tenantDID.DID, ext@tenantURI.URI'
+x-refined-from:
+- windstream-contact-center-openapi.yml
+- windstream-voice-openapi.yml
