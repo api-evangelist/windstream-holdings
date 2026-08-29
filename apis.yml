@@ -221,6 +221,9 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 common:
+  - type: CapabilityMap
+    url: capabilities/windstream-holdings-capability-edges.yml
+    name: Windstream Holdings Business Capability Map
   - type: AgenticAccess
     url: agentic-access/windstream-holdings-agentic-access.yml
   - type: DomainSecurity
