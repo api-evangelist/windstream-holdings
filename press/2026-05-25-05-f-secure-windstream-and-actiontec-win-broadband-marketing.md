@@ -1,7 +1,9 @@
 ---
 title: F-Secure, Windstream, and Actiontec win broadband marketing ...
 url: https://www.pressreleasepoint.com/f-secure-windstream-and-actiontec-win-broadband-marketing-award-connected-home-security-offering?lang=es
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Windstream Holdings" press release artificial intelligence'
 position: 5
 source: serpapi-google

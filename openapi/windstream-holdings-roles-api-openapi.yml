@@ -15,7 +15,7 @@ servers:
       default: ccs.windstreamenterprise.com
       description: CCS domain hostname
 tags:
-- name: roles
+- name: Roles
   description: Role and permission management
 paths:
   /roles/:
@@ -24,7 +24,7 @@ paths:
       summary: List Roles
       description: Returns a list of all roles and permissions available in the system.
       tags:
-      - roles
+      - Roles
       responses:
         '200':
           description: List of roles
@@ -40,7 +40,7 @@ paths:
       summary: List Tenant Roles
       description: Returns all roles configured for a specific tenant.
       tags:
-      - roles
+      - Roles
       parameters:
       - name: tenantUuid
         in: path

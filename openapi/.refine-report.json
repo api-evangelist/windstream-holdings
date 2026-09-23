@@ -23,7 +23,8 @@
     "windstream-contact-center-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "windstream-voice-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "tag 'calls' spans 2 source specs (windstream-contact-center-openapi.yml, windstream-voice-openapi.yml): per-path servers applied",
-    "tag 'extensions' spans 2 source specs (windstream-contact-center-openapi.yml, windstream-voice-openapi.yml): per-path servers applied"
+    "tag 'extensions' spans 2 source specs (windstream-contact-center-openapi.yml, windstream-voice-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "windstream-holdings-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",

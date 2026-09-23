@@ -1,7 +1,9 @@
 ---
 title: Windstream Enterprise and Talkdesk Partner to Deliver AI- ...
 url: https://news.windstream.com/news/news-details/2023/Windstream-Enterprise-and-Talkdesk-Partner-to-Deliver-AI-Powered-CCaaS-Solution/default.aspx
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Windstream Holdings" press release artificial intelligence'
 position: 1
 source: serpapi-google

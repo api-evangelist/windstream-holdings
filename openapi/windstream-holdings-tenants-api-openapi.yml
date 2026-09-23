@@ -15,7 +15,7 @@ servers:
       default: ccs.windstreamenterprise.com
       description: CCS domain hostname
 tags:
-- name: tenants
+- name: Tenants
   description: Tenant management and configuration
 paths:
   /tenants:
@@ -24,7 +24,7 @@ paths:
       summary: List Tenants
       description: Returns a list of all tenants managed by the contact center.
       tags:
-      - tenants
+      - Tenants
       responses:
         '200':
           description: List of tenants
@@ -40,7 +40,7 @@ paths:
       summary: Get Tenant Details
       description: Returns detailed configuration for a specific tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -63,7 +63,7 @@ paths:
       summary: Update Tenant Products
       description: Adds or removes product assignments for a tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -86,7 +86,7 @@ paths:
       summary: Update Tenant Limits
       description: Updates usage limits and license counts for a tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -110,7 +110,7 @@ paths:
       summary: List Tenant Roles
       description: Returns all roles configured for a specific tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -134,7 +134,7 @@ paths:
       summary: List Tenant ACDs
       description: Returns all Automatic Call Distributors (ACDs/queues) for a tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -158,7 +158,7 @@ paths:
       summary: List Presence Options
       description: Returns available presence/status options for agents in a tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -182,7 +182,7 @@ paths:
       summary: List Tenant Extensions
       description: Returns all extensions configured for a specific tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -206,7 +206,7 @@ paths:
       summary: Update Tenant Extension
       description: Updates configuration for a specific extension within a tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -237,7 +237,7 @@ paths:
       summary: Get Text Message Count
       description: Returns the SMS/MMS message count for a tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -258,7 +258,7 @@ paths:
       summary: Reset Text Message Count
       description: Resets the SMS/MMS message count for a tenant.
       tags:
-      - tenants
+      - Tenants
       parameters:
       - name: tenantUuid
         in: path
@@ -272,30 +272,51 @@ paths:
           description: Count reset successfully
 components:
   schemas:
-    Tenant:
+    TenantLimitsUpdate:
       type: object
-      description: A contact center tenant configuration
+      description: Request to update tenant limits
       properties:
-        uuid:
-          type: string
-          format: uuid
-          description: Tenant UUID
-        name:
-          type: string
-          description: Tenant name
-        status:
-          type: string
-          description: Tenant status
-          enum:
-          - active
-          - inactive
-          - suspended
         max_agents:
           type: integer
-          description: Maximum number of concurrent agents
+          description: New maximum agent count
         max_calls:
           type: integer
-          description: Maximum concurrent calls
+          description: New maximum concurrent calls
+        sms_limit:
+          type: integer
+          description: SMS message limit
+    ExtensionUpdate:
+      type: object
+      description: Extension update request
+      properties:
+        name:
+          type: string
+          description: New display name
+        role:
+          type: string
+          description: Updated role assignment
+    ACD:
+      type: object
+      description: An Automatic Call Distributor (queue)
+      properties:
+        id:
+          type: string
+          description: ACD identifier
+        name:
+          type: string
+          description: Queue name
+        tenant_uuid:
+          type: string
+          description: Tenant UUID
+        max_queue_length:
+          type: integer
+          description: Maximum number of calls in queue
+        current_queue_length:
+          type: integer
+          description: Current number of calls waiting
+        agents_available:
+          type: integer
+          description: Number of available agents
     Extension:
       type: object
       description: A contact center extension
@@ -327,68 +348,6 @@ components:
           items:
             type: string
           description: Product IDs to remove
-    PresenceOption:
-      type: object
-      description: An agent presence/status option
-      properties:
-        id:
-          type: string
-          description: Presence option identifier
-        name:
-          type: string
-          description: Display name (e.g., Available, Busy, On Break)
-        available_for_calls:
-          type: boolean
-          description: Whether agent is available to receive calls in this state
-    ACD:
-      type: object
-      description: An Automatic Call Distributor (queue)
-      properties:
-        id:
-          type: string
-          description: ACD identifier
-        name:
-          type: string
-          description: Queue name
-        tenant_uuid:
-          type: string
-          description: Tenant UUID
-        max_queue_length:
-          type: integer
-          description: Maximum number of calls in queue
-        current_queue_length:
-          type: integer
-          description: Current number of calls waiting
-        agents_available:
-          type: integer
-          description: Number of available agents
-    TenantLimitsUpdate:
-      type: object
-      description: Request to update tenant limits
-      properties:
-        max_agents:
-          type: integer
-          description: New maximum agent count
-        max_calls:
-          type: integer
-          description: New maximum concurrent calls
-        sms_limit:
-          type: integer
-          description: SMS message limit
-    TextCount:
-      type: object
-      description: SMS/MMS message count
-      properties:
-        sms_count:
-          type: integer
-          description: Number of SMS messages sent
-        mms_count:
-          type: integer
-          description: Number of MMS messages sent
-        period_start:
-          type: string
-          format: date-time
-          description: Start of the counting period
     Role:
       type: object
       description: A role with associated permissions
@@ -409,16 +368,57 @@ components:
         description:
           type: string
           description: Role description
-    ExtensionUpdate:
+    TextCount:
       type: object
-      description: Extension update request
+      description: SMS/MMS message count
       properties:
+        sms_count:
+          type: integer
+          description: Number of SMS messages sent
+        mms_count:
+          type: integer
+          description: Number of MMS messages sent
+        period_start:
+          type: string
+          format: date-time
+          description: Start of the counting period
+    Tenant:
+      type: object
+      description: A contact center tenant configuration
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Tenant UUID
         name:
           type: string
-          description: New display name
-        role:
+          description: Tenant name
+        status:
           type: string
-          description: Updated role assignment
+          description: Tenant status
+          enum:
+          - active
+          - inactive
+          - suspended
+        max_agents:
+          type: integer
+          description: Maximum number of concurrent agents
+        max_calls:
+          type: integer
+          description: Maximum concurrent calls
+    PresenceOption:
+      type: object
+      description: An agent presence/status option
+      properties:
+        id:
+          type: string
+          description: Presence option identifier
+        name:
+          type: string
+          description: Display name (e.g., Available, Busy, On Break)
+        available_for_calls:
+          type: boolean
+          description: Whether agent is available to receive calls in this state
   securitySchemes:
     bearerAuth:
       type: http

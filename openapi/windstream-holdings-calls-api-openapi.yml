@@ -21,7 +21,7 @@ servers:
       default: webadmin.windstreamenterprise.com
       description: WebAdmin server hostname
 tags:
-- name: calls
+- name: Calls
   description: Call management and control
 paths:
   /calls:
@@ -30,7 +30,7 @@ paths:
       summary: List Calls
       description: Returns a list of active and recent calls in the contact center.
       tags:
-      - calls
+      - Calls
       responses:
         '200':
           description: List of calls
@@ -53,7 +53,7 @@ paths:
       summary: Get Call
       description: Returns details for a specific call by its ID.
       tags:
-      - calls
+      - Calls
       parameters:
       - name: callId
         in: path
@@ -73,7 +73,7 @@ paths:
       summary: Control Call
       description: Executes a control action on an active call. Supported actions include startSuppression, stopSuppression, kill, wait_transfer, wait_redirect, wait_kill.
       tags:
-      - calls
+      - Calls
       parameters:
       - name: callId
         in: path
@@ -95,7 +95,7 @@ paths:
       summary: Terminate Call
       description: Terminates an active call.
       tags:
-      - calls
+      - Calls
       parameters:
       - name: callId
         in: path
@@ -121,7 +121,7 @@ paths:
       summary: Search Calls
       description: Searches calls by various criteria including calling number, called number, and date range.
       tags:
-      - calls
+      - Calls
       parameters:
       - name: calling_number
         in: query
@@ -177,7 +177,7 @@ paths:
       summary: Make Outbound Call
       description: Initiates an outbound call from a specified extension to a destination number.
       tags:
-      - calls
+      - Calls
       requestBody:
         required: true
         content:
@@ -254,32 +254,6 @@ components:
         duration:
           type: integer
           description: Call duration in seconds
-    OutboundCallRequest:
-      type: object
-      description: Request to initiate an outbound call
-      required:
-      - from
-      - to
-      properties:
-        from:
-          type: string
-          description: Source extension number
-        to:
-          type: string
-          description: Destination phone number or extension
-        caller_id:
-          type: string
-          description: Caller ID to present to the called party
-    CallControlResponse:
-      type: object
-      description: Response from a call control action
-      properties:
-        success:
-          type: boolean
-          description: Whether the action was successful
-        message:
-          type: string
-          description: Result message
     CallControlRequest_2:
       type: object
       description: Request body for call control actions
@@ -300,6 +274,16 @@ components:
         destination:
           type: string
           description: Transfer destination (required for transfer action)
+    CallControlResponse:
+      type: object
+      description: Response from a call control action
+      properties:
+        success:
+          type: boolean
+          description: Whether the action was successful
+        message:
+          type: string
+          description: Result message
     Call_2:
       type: object
       description: An active or completed phone call
@@ -337,6 +321,22 @@ components:
         _links:
           type: object
           description: HAL links for call actions
+    OutboundCallRequest:
+      type: object
+      description: Request to initiate an outbound call
+      required:
+      - from
+      - to
+      properties:
+        from:
+          type: string
+          description: Source extension number
+        to:
+          type: string
+          description: Destination phone number or extension
+        caller_id:
+          type: string
+          description: Caller ID to present to the called party
   securitySchemes:
     bearerAuth:
       type: http

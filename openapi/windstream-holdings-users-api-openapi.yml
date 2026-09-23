@@ -17,7 +17,7 @@ servers:
 security:
 - basicAuth: []
 tags:
-- name: users
+- name: Users
   description: User account management
 paths:
   /users:
@@ -26,7 +26,7 @@ paths:
       summary: List Users
       description: Returns a list of all users configured in the system.
       tags:
-      - users
+      - Users
       responses:
         '200':
           description: List of users
@@ -41,7 +41,7 @@ paths:
       summary: Create User
       description: Creates a new user account.
       tags:
-      - users
+      - Users
       requestBody:
         required: true
         content:
@@ -61,7 +61,7 @@ paths:
       summary: Get User
       description: Retrieves details of a specific user.
       tags:
-      - users
+      - Users
       parameters:
       - name: userId
         in: path
@@ -81,7 +81,7 @@ paths:
       summary: Update User
       description: Updates an existing user's configuration.
       tags:
-      - users
+      - Users
       parameters:
       - name: userId
         in: path
@@ -103,7 +103,7 @@ paths:
       summary: Delete User
       description: Removes a user account.
       tags:
-      - users
+      - Users
       parameters:
       - name: userId
         in: path

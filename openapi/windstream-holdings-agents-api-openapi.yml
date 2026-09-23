@@ -15,7 +15,7 @@ servers:
       default: ccs.windstreamenterprise.com
       description: CCS domain hostname
 tags:
-- name: agents
+- name: Agents
   description: Agent state management
 paths:
   /tenants/{tenantUuid}/presence-options:
@@ -24,7 +24,7 @@ paths:
       summary: List Presence Options
       description: Returns available presence/status options for agents in a tenant.
       tags:
-      - agents
+      - Agents
       parameters:
       - name: tenantUuid
         in: path
@@ -48,7 +48,7 @@ paths:
       summary: Update Agent State
       description: Updates the current agent's presence state (e.g., available, busy, on break).
       tags:
-      - agents
+      - Agents
       requestBody:
         required: true
         content:
@@ -64,7 +64,7 @@ paths:
       summary: Get Agent State
       description: Returns the current presence/state of a specific agent extension.
       tags:
-      - agents
+      - Agents
       parameters:
       - name: extensionUuid
         in: path
@@ -82,6 +82,18 @@ paths:
                 $ref: '#/components/schemas/AgentState'
 components:
   schemas:
+    AgentStateUpdate:
+      type: object
+      description: Agent state update request
+      required:
+      - state
+      properties:
+        state:
+          type: string
+          description: New presence state
+        reason:
+          type: string
+          description: Reason for state change
     AgentState:
       type: object
       description: Current agent state/presence
@@ -99,18 +111,6 @@ components:
           type: string
           format: date-time
           description: Timestamp of last state change
-    AgentStateUpdate:
-      type: object
-      description: Agent state update request
-      required:
-      - state
-      properties:
-        state:
-          type: string
-          description: New presence state
-        reason:
-          type: string
-          description: Reason for state change
     PresenceOption:
       type: object
       description: An agent presence/status option

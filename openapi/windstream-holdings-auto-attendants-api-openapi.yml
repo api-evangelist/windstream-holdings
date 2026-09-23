@@ -116,22 +116,6 @@ paths:
           description: Auto-attendant deleted
 components:
   schemas:
-    AutoAttendantCreate:
-      type: object
-      description: Request body for creating or updating an auto-attendant
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Display name
-        greeting:
-          type: string
-          description: Greeting message
-        menu_options:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuOption'
     AutoAttendant:
       type: object
       description: An auto-attendant (IVR) configuration
@@ -168,6 +152,22 @@ components:
         destination:
           type: string
           description: Transfer destination if action is transfer
+    AutoAttendantCreate:
+      type: object
+      description: Request body for creating or updating an auto-attendant
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Display name
+        greeting:
+          type: string
+          description: Greeting message
+        menu_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuOption'
   securitySchemes:
     basicAuth:
       type: http

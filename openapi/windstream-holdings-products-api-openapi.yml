@@ -15,7 +15,7 @@ servers:
       default: ccs.windstreamenterprise.com
       description: CCS domain hostname
 tags:
-- name: products
+- name: Products
   description: Product catalog operations
 paths:
   /products/:
@@ -24,7 +24,7 @@ paths:
       summary: List Products
       description: Returns a list of all available contact center products.
       tags:
-      - products
+      - Products
       responses:
         '200':
           description: List of products

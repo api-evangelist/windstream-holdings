@@ -21,7 +21,7 @@ servers:
       default: webadmin.windstreamenterprise.com
       description: WebAdmin server hostname
 tags:
-- name: extensions
+- name: Extensions
   description: Extension management
 paths:
   /tenants/{tenantUuid}/extensions:
@@ -30,7 +30,7 @@ paths:
       summary: List Tenant Extensions
       description: Returns all extensions configured for a specific tenant.
       tags:
-      - extensions
+      - Extensions
       parameters:
       - name: tenantUuid
         in: path
@@ -61,7 +61,7 @@ paths:
       summary: Update Tenant Extension
       description: Updates configuration for a specific extension within a tenant.
       tags:
-      - extensions
+      - Extensions
       parameters:
       - name: tenantUuid
         in: path
@@ -99,7 +99,7 @@ paths:
       summary: Get Agent State
       description: Returns the current presence/state of a specific agent extension.
       tags:
-      - extensions
+      - Extensions
       parameters:
       - name: extensionUuid
         in: path
@@ -128,7 +128,7 @@ paths:
       summary: List Extensions
       description: Returns a list of all extensions in the tenant.
       tags:
-      - extensions
+      - Extensions
       parameters:
       - name: tenant
         in: query
@@ -172,7 +172,7 @@ paths:
       summary: Get Extension Details
       description: Retrieves details of a specific extension.
       tags:
-      - extensions
+      - Extensions
       parameters:
       - name: extensionId
         in: path
@@ -196,7 +196,7 @@ paths:
       summary: Update Extension
       description: Updates the configuration of an existing extension.
       tags:
-      - extensions
+      - Extensions
       parameters:
       - name: extensionId
         in: path
