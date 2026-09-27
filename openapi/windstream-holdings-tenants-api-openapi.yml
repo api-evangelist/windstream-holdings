@@ -272,6 +272,44 @@ paths:
           description: Count reset successfully
 components:
   schemas:
+    TenantProductUpdate:
+      type: object
+      description: Request to update tenant product assignments
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+          description: Product IDs to add
+        remove:
+          type: array
+          items:
+            type: string
+          description: Product IDs to remove
+    Tenant:
+      type: object
+      description: A contact center tenant configuration
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Tenant UUID
+        name:
+          type: string
+          description: Tenant name
+        status:
+          type: string
+          description: Tenant status
+          enum:
+          - active
+          - inactive
+          - suspended
+        max_agents:
+          type: integer
+          description: Maximum number of concurrent agents
+        max_calls:
+          type: integer
+          description: Maximum concurrent calls
     TenantLimitsUpdate:
       type: object
       description: Request to update tenant limits
@@ -295,6 +333,39 @@ components:
         role:
           type: string
           description: Updated role assignment
+    PresenceOption:
+      type: object
+      description: An agent presence/status option
+      properties:
+        id:
+          type: string
+          description: Presence option identifier
+        name:
+          type: string
+          description: Display name (e.g., Available, Busy, On Break)
+        available_for_calls:
+          type: boolean
+          description: Whether agent is available to receive calls in this state
+    Role:
+      type: object
+      description: A role with associated permissions
+      properties:
+        id:
+          type: string
+          description: Role identifier
+        name:
+          type: string
+          description: Role name
+          enum:
+          - API
+          - Agent Control
+          - Call Control
+          - Agent Events
+          - Call Events
+          - Inbound Queue Events
+        description:
+          type: string
+          description: Role description
     ACD:
       type: object
       description: An Automatic Call Distributor (queue)
@@ -334,40 +405,6 @@ components:
         tenant_uuid:
           type: string
           description: Tenant UUID
-    TenantProductUpdate:
-      type: object
-      description: Request to update tenant product assignments
-      properties:
-        add:
-          type: array
-          items:
-            type: string
-          description: Product IDs to add
-        remove:
-          type: array
-          items:
-            type: string
-          description: Product IDs to remove
-    Role:
-      type: object
-      description: A role with associated permissions
-      properties:
-        id:
-          type: string
-          description: Role identifier
-        name:
-          type: string
-          description: Role name
-          enum:
-          - API
-          - Agent Control
-          - Call Control
-          - Agent Events
-          - Call Events
-          - Inbound Queue Events
-        description:
-          type: string
-          description: Role description
     TextCount:
       type: object
       description: SMS/MMS message count
@@ -382,43 +419,6 @@ components:
           type: string
           format: date-time
           description: Start of the counting period
-    Tenant:
-      type: object
-      description: A contact center tenant configuration
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          description: Tenant UUID
-        name:
-          type: string
-          description: Tenant name
-        status:
-          type: string
-          description: Tenant status
-          enum:
-          - active
-          - inactive
-          - suspended
-        max_agents:
-          type: integer
-          description: Maximum number of concurrent agents
-        max_calls:
-          type: integer
-          description: Maximum concurrent calls
-    PresenceOption:
-      type: object
-      description: An agent presence/status option
-      properties:
-        id:
-          type: string
-          description: Presence option identifier
-        name:
-          type: string
-          description: Display name (e.g., Available, Busy, On Break)
-        available_for_calls:
-          type: boolean
-          description: Whether agent is available to receive calls in this state
   securitySchemes:
     bearerAuth:
       type: http

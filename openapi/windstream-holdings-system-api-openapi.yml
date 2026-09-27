@@ -42,16 +42,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    HalLink:
-      type: object
-      description: HAL link object
-      properties:
-        href:
-          type: string
-          description: URL of the linked resource
-        title:
-          type: string
-          description: Human-readable title of the link
     Error:
       type: object
       description: Error response
@@ -65,6 +55,16 @@ components:
         details:
           type: string
           description: Additional error details
+    HalLink:
+      type: object
+      description: HAL link object
+      properties:
+        href:
+          type: string
+          description: URL of the linked resource
+        title:
+          type: string
+          description: Human-readable title of the link
     HalResource:
       type: object
       description: HAL (Hypertext Application Language) resource with embedded links

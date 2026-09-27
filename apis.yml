@@ -43,7 +43,7 @@ tags:
   - Managed Service
   - Network Communications
   - SD-WAN
-  - Telecom
+  - Telecommunications
   - UCaaS
   - Unified Communications
   - Fortune 500
@@ -63,7 +63,7 @@ url: https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/h
 specificationVersion: '0.23'
 apis:
 - aid: windstream-holdings:windstream-holdings-agents-api
-  name: Windstream Holdings agents API
+  name: Windstream Holdings Agents API
   description: Agent state management
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -81,7 +81,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-auto-attendants-api
-  name: Windstream Holdings auto-attendants API
+  name: Windstream Holdings Auto Attendants API
   description: Auto-attendant configuration
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -97,7 +97,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-calls-api
-  name: Windstream Holdings calls API
+  name: Windstream Holdings Calls API
   description: Call management and control
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -115,7 +115,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-extensions-api
-  name: Windstream Holdings extensions API
+  name: Windstream Holdings Extensions API
   description: Extension management
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -133,7 +133,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-products-api
-  name: Windstream Holdings products API
+  name: Windstream Holdings Products API
   description: Product catalog operations
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -151,7 +151,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-roles-api
-  name: Windstream Holdings roles API
+  name: Windstream Holdings Roles API
   description: Role and permission management
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -169,7 +169,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-system-api
-  name: Windstream Holdings system API
+  name: Windstream Holdings System API
   description: System-level operations
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -187,7 +187,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-tenants-api
-  name: Windstream Holdings tenants API
+  name: Windstream Holdings Tenants API
   description: Tenant management and configuration
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api
@@ -205,7 +205,7 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 - aid: windstream-holdings:windstream-holdings-users-api
-  name: Windstream Holdings users API
+  name: Windstream Holdings Users API
   description: User account management
   humanURL: https://api.solutions.uniti.com/voice.html
   baseURL: https://webadmin.windstreamenterprise.com/api

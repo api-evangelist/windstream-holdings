@@ -274,16 +274,22 @@ components:
         destination:
           type: string
           description: Transfer destination (required for transfer action)
-    CallControlResponse:
+    OutboundCallRequest:
       type: object
-      description: Response from a call control action
+      description: Request to initiate an outbound call
+      required:
+      - from
+      - to
       properties:
-        success:
-          type: boolean
-          description: Whether the action was successful
-        message:
+        from:
           type: string
-          description: Result message
+          description: Source extension number
+        to:
+          type: string
+          description: Destination phone number or extension
+        caller_id:
+          type: string
+          description: Caller ID to present to the called party
     Call_2:
       type: object
       description: An active or completed phone call
@@ -321,22 +327,16 @@ components:
         _links:
           type: object
           description: HAL links for call actions
-    OutboundCallRequest:
+    CallControlResponse:
       type: object
-      description: Request to initiate an outbound call
-      required:
-      - from
-      - to
+      description: Response from a call control action
       properties:
-        from:
+        success:
+          type: boolean
+          description: Whether the action was successful
+        message:
           type: string
-          description: Source extension number
-        to:
-          type: string
-          description: Destination phone number or extension
-        caller_id:
-          type: string
-          description: Caller ID to present to the called party
+          description: Result message
   securitySchemes:
     bearerAuth:
       type: http
