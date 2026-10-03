@@ -206,22 +206,6 @@ paths:
           description: WebAdmin server hostname
 components:
   schemas:
-    CallControlRequest:
-      type: object
-      description: Call control action request
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          description: Control action to execute
-          enum:
-          - startSuppression
-          - stopSuppression
-          - kill
-          - wait_transfer
-          - wait_redirect
-          - wait_kill
     Call:
       type: object
       description: A call record in the contact center
@@ -254,42 +238,32 @@ components:
         duration:
           type: integer
           description: Call duration in seconds
-    CallControlRequest_2:
+    CallControlRequest:
       type: object
-      description: Request body for call control actions
+      description: Call control action request
       required:
       - action
       properties:
         action:
           type: string
-          description: Call control action to execute
+          description: Control action to execute
           enum:
-          - transfer
-          - hold
-          - unhold
-          - conference
-          - record
-          - stop_record
-          - terminate
-        destination:
-          type: string
-          description: Transfer destination (required for transfer action)
-    OutboundCallRequest:
+          - startSuppression
+          - stopSuppression
+          - kill
+          - wait_transfer
+          - wait_redirect
+          - wait_kill
+    CallControlResponse:
       type: object
-      description: Request to initiate an outbound call
-      required:
-      - from
-      - to
+      description: Response from a call control action
       properties:
-        from:
+        success:
+          type: boolean
+          description: Whether the action was successful
+        message:
           type: string
-          description: Source extension number
-        to:
-          type: string
-          description: Destination phone number or extension
-        caller_id:
-          type: string
-          description: Caller ID to present to the called party
+          description: Result message
     Call_2:
       type: object
       description: An active or completed phone call
@@ -327,16 +301,42 @@ components:
         _links:
           type: object
           description: HAL links for call actions
-    CallControlResponse:
+    OutboundCallRequest:
       type: object
-      description: Response from a call control action
+      description: Request to initiate an outbound call
+      required:
+      - from
+      - to
       properties:
-        success:
-          type: boolean
-          description: Whether the action was successful
-        message:
+        from:
           type: string
-          description: Result message
+          description: Source extension number
+        to:
+          type: string
+          description: Destination phone number or extension
+        caller_id:
+          type: string
+          description: Caller ID to present to the called party
+    CallControlRequest_2:
+      type: object
+      description: Request body for call control actions
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: Call control action to execute
+          enum:
+          - transfer
+          - hold
+          - unhold
+          - conference
+          - record
+          - stop_record
+          - terminate
+        destination:
+          type: string
+          description: Transfer destination (required for transfer action)
   securitySchemes:
     bearerAuth:
       type: http

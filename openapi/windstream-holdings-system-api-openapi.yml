@@ -55,6 +55,15 @@ components:
         details:
           type: string
           description: Additional error details
+    HalResource:
+      type: object
+      description: HAL (Hypertext Application Language) resource with embedded links
+      properties:
+        _links:
+          type: object
+          description: HAL links to related resources
+          additionalProperties:
+            $ref: '#/components/schemas/HalLink'
     HalLink:
       type: object
       description: HAL link object
@@ -65,15 +74,6 @@ components:
         title:
           type: string
           description: Human-readable title of the link
-    HalResource:
-      type: object
-      description: HAL (Hypertext Application Language) resource with embedded links
-      properties:
-        _links:
-          type: object
-          description: HAL links to related resources
-          additionalProperties:
-            $ref: '#/components/schemas/HalLink'
   securitySchemes:
     basicAuth:
       type: http

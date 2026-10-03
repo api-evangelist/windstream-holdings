@@ -228,6 +228,23 @@ paths:
           description: WebAdmin server hostname
 components:
   schemas:
+    AgentState:
+      type: object
+      description: Current agent state/presence
+      properties:
+        extension_uuid:
+          type: string
+          description: Extension UUID
+        state:
+          type: string
+          description: Current presence state
+        available_for_calls:
+          type: boolean
+          description: Whether agent can receive calls
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last state change
     ExtensionUpdate:
       type: object
       description: Extension update request
@@ -255,23 +272,6 @@ components:
         tenant_uuid:
           type: string
           description: Tenant UUID
-    AgentState:
-      type: object
-      description: Current agent state/presence
-      properties:
-        extension_uuid:
-          type: string
-          description: Extension UUID
-        state:
-          type: string
-          description: Current presence state
-        available_for_calls:
-          type: boolean
-          description: Whether agent can receive calls
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp of last state change
     ExtensionUpdate_2:
       type: object
       description: Extension update request body

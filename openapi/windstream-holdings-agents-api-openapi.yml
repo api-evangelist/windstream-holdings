@@ -82,6 +82,23 @@ paths:
                 $ref: '#/components/schemas/AgentState'
 components:
   schemas:
+    AgentState:
+      type: object
+      description: Current agent state/presence
+      properties:
+        extension_uuid:
+          type: string
+          description: Extension UUID
+        state:
+          type: string
+          description: Current presence state
+        available_for_calls:
+          type: boolean
+          description: Whether agent can receive calls
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last state change
     AgentStateUpdate:
       type: object
       description: Agent state update request
@@ -107,23 +124,6 @@ components:
         available_for_calls:
           type: boolean
           description: Whether agent is available to receive calls in this state
-    AgentState:
-      type: object
-      description: Current agent state/presence
-      properties:
-        extension_uuid:
-          type: string
-          description: Extension UUID
-        state:
-          type: string
-          description: Current presence state
-        available_for_calls:
-          type: boolean
-          description: Whether agent can receive calls
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp of last state change
   securitySchemes:
     bearerAuth:
       type: http

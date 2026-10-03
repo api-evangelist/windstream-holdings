@@ -272,6 +272,59 @@ paths:
           description: Count reset successfully
 components:
   schemas:
+    ExtensionUpdate:
+      type: object
+      description: Extension update request
+      properties:
+        name:
+          type: string
+          description: New display name
+        role:
+          type: string
+          description: Updated role assignment
+    PresenceOption:
+      type: object
+      description: An agent presence/status option
+      properties:
+        id:
+          type: string
+          description: Presence option identifier
+        name:
+          type: string
+          description: Display name (e.g., Available, Busy, On Break)
+        available_for_calls:
+          type: boolean
+          description: Whether agent is available to receive calls in this state
+    Extension:
+      type: object
+      description: A contact center extension
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Extension UUID
+        number:
+          type: string
+          description: Extension number
+        name:
+          type: string
+          description: Display name
+        tenant_uuid:
+          type: string
+          description: Tenant UUID
+    TenantLimitsUpdate:
+      type: object
+      description: Request to update tenant limits
+      properties:
+        max_agents:
+          type: integer
+          description: New maximum agent count
+        max_calls:
+          type: integer
+          description: New maximum concurrent calls
+        sms_limit:
+          type: integer
+          description: SMS message limit
     TenantProductUpdate:
       type: object
       description: Request to update tenant product assignments
@@ -310,42 +363,20 @@ components:
         max_calls:
           type: integer
           description: Maximum concurrent calls
-    TenantLimitsUpdate:
+    TextCount:
       type: object
-      description: Request to update tenant limits
+      description: SMS/MMS message count
       properties:
-        max_agents:
+        sms_count:
           type: integer
-          description: New maximum agent count
-        max_calls:
+          description: Number of SMS messages sent
+        mms_count:
           type: integer
-          description: New maximum concurrent calls
-        sms_limit:
-          type: integer
-          description: SMS message limit
-    ExtensionUpdate:
-      type: object
-      description: Extension update request
-      properties:
-        name:
+          description: Number of MMS messages sent
+        period_start:
           type: string
-          description: New display name
-        role:
-          type: string
-          description: Updated role assignment
-    PresenceOption:
-      type: object
-      description: An agent presence/status option
-      properties:
-        id:
-          type: string
-          description: Presence option identifier
-        name:
-          type: string
-          description: Display name (e.g., Available, Busy, On Break)
-        available_for_calls:
-          type: boolean
-          description: Whether agent is available to receive calls in this state
+          format: date-time
+          description: Start of the counting period
     Role:
       type: object
       description: A role with associated permissions
@@ -388,37 +419,6 @@ components:
         agents_available:
           type: integer
           description: Number of available agents
-    Extension:
-      type: object
-      description: A contact center extension
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          description: Extension UUID
-        number:
-          type: string
-          description: Extension number
-        name:
-          type: string
-          description: Display name
-        tenant_uuid:
-          type: string
-          description: Tenant UUID
-    TextCount:
-      type: object
-      description: SMS/MMS message count
-      properties:
-        sms_count:
-          type: integer
-          description: Number of SMS messages sent
-        mms_count:
-          type: integer
-          description: Number of MMS messages sent
-        period_start:
-          type: string
-          format: date-time
-          description: Start of the counting period
   securitySchemes:
     bearerAuth:
       type: http
