@@ -282,19 +282,6 @@ components:
         role:
           type: string
           description: Updated role assignment
-    PresenceOption:
-      type: object
-      description: An agent presence/status option
-      properties:
-        id:
-          type: string
-          description: Presence option identifier
-        name:
-          type: string
-          description: Display name (e.g., Available, Busy, On Break)
-        available_for_calls:
-          type: boolean
-          description: Whether agent is available to receive calls in this state
     Extension:
       type: object
       description: A contact center extension
@@ -312,19 +299,26 @@ components:
         tenant_uuid:
           type: string
           description: Tenant UUID
-    TenantLimitsUpdate:
+    Role:
       type: object
-      description: Request to update tenant limits
+      description: A role with associated permissions
       properties:
-        max_agents:
-          type: integer
-          description: New maximum agent count
-        max_calls:
-          type: integer
-          description: New maximum concurrent calls
-        sms_limit:
-          type: integer
-          description: SMS message limit
+        id:
+          type: string
+          description: Role identifier
+        name:
+          type: string
+          description: Role name
+          enum:
+          - API
+          - Agent Control
+          - Call Control
+          - Agent Events
+          - Call Events
+          - Inbound Queue Events
+        description:
+          type: string
+          description: Role description
     TenantProductUpdate:
       type: object
       description: Request to update tenant product assignments
@@ -339,6 +333,32 @@ components:
           items:
             type: string
           description: Product IDs to remove
+    TenantLimitsUpdate:
+      type: object
+      description: Request to update tenant limits
+      properties:
+        max_agents:
+          type: integer
+          description: New maximum agent count
+        max_calls:
+          type: integer
+          description: New maximum concurrent calls
+        sms_limit:
+          type: integer
+          description: SMS message limit
+    PresenceOption:
+      type: object
+      description: An agent presence/status option
+      properties:
+        id:
+          type: string
+          description: Presence option identifier
+        name:
+          type: string
+          description: Display name (e.g., Available, Busy, On Break)
+        available_for_calls:
+          type: boolean
+          description: Whether agent is available to receive calls in this state
     Tenant:
       type: object
       description: A contact center tenant configuration
@@ -363,40 +383,6 @@ components:
         max_calls:
           type: integer
           description: Maximum concurrent calls
-    TextCount:
-      type: object
-      description: SMS/MMS message count
-      properties:
-        sms_count:
-          type: integer
-          description: Number of SMS messages sent
-        mms_count:
-          type: integer
-          description: Number of MMS messages sent
-        period_start:
-          type: string
-          format: date-time
-          description: Start of the counting period
-    Role:
-      type: object
-      description: A role with associated permissions
-      properties:
-        id:
-          type: string
-          description: Role identifier
-        name:
-          type: string
-          description: Role name
-          enum:
-          - API
-          - Agent Control
-          - Call Control
-          - Agent Events
-          - Call Events
-          - Inbound Queue Events
-        description:
-          type: string
-          description: Role description
     ACD:
       type: object
       description: An Automatic Call Distributor (queue)
@@ -419,6 +405,20 @@ components:
         agents_available:
           type: integer
           description: Number of available agents
+    TextCount:
+      type: object
+      description: SMS/MMS message count
+      properties:
+        sms_count:
+          type: integer
+          description: Number of SMS messages sent
+        mms_count:
+          type: integer
+          description: Number of MMS messages sent
+        period_start:
+          type: string
+          format: date-time
+          description: Start of the counting period
   securitySchemes:
     bearerAuth:
       type: http

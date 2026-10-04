@@ -134,22 +134,6 @@ components:
           description: DTMF menu options
           items:
             $ref: '#/components/schemas/MenuOption'
-    AutoAttendantCreate:
-      type: object
-      description: Request body for creating or updating an auto-attendant
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Display name
-        greeting:
-          type: string
-          description: Greeting message
-        menu_options:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuOption'
     MenuOption:
       type: object
       description: A single DTMF menu option
@@ -168,6 +152,22 @@ components:
         destination:
           type: string
           description: Transfer destination if action is transfer
+    AutoAttendantCreate:
+      type: object
+      description: Request body for creating or updating an auto-attendant
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Display name
+        greeting:
+          type: string
+          description: Greeting message
+        menu_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuOption'
   securitySchemes:
     basicAuth:
       type: http

@@ -116,6 +116,29 @@ paths:
           description: User deleted
 components:
   schemas:
+    UserCreate:
+      type: object
+      description: Request body for creating or updating a user
+      required:
+      - username
+      - email
+      properties:
+        username:
+          type: string
+          description: Login username
+        email:
+          type: string
+          description: Email address
+        extension:
+          type: string
+          description: Extension to assign
+        role:
+          type: string
+          description: User role
+          enum:
+          - admin
+          - user
+          - read_only
     User:
       type: object
       description: A user account
@@ -142,29 +165,6 @@ components:
         tenant:
           type: string
           description: Tenant ID
-    UserCreate:
-      type: object
-      description: Request body for creating or updating a user
-      required:
-      - username
-      - email
-      properties:
-        username:
-          type: string
-          description: Login username
-        email:
-          type: string
-          description: Email address
-        extension:
-          type: string
-          description: Extension to assign
-        role:
-          type: string
-          description: User role
-          enum:
-          - admin
-          - user
-          - read_only
   securitySchemes:
     basicAuth:
       type: http
