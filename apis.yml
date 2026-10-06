@@ -58,7 +58,7 @@ tags_raw:
   - Unified Communications
   - Fortune 500
 created: '2026-05-03'
-modified: '2026-05-19'
+modified: '2026-10-06'
 url: https://raw.githubusercontent.com/api-evangelist/windstream-holdings/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
@@ -223,6 +223,8 @@ apis:
   - type: Documentation
     url: https://api.solutions.uniti.com/ccs.html
 common:
+  - url: https://solutions.uniti.com/blog
+    type: Blog
   - type: CapabilityMap
     url: capabilities/windstream-holdings-capability-edges.yml
     name: Windstream Holdings Business Capability Map
