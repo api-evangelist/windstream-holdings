@@ -116,24 +116,6 @@ paths:
           description: Auto-attendant deleted
 components:
   schemas:
-    AutoAttendant:
-      type: object
-      description: An auto-attendant (IVR) configuration
-      properties:
-        id:
-          type: string
-          description: Auto-attendant identifier
-        name:
-          type: string
-          description: Display name
-        greeting:
-          type: string
-          description: Greeting message or audio file path
-        menu_options:
-          type: array
-          description: DTMF menu options
-          items:
-            $ref: '#/components/schemas/MenuOption'
     MenuOption:
       type: object
       description: A single DTMF menu option
@@ -166,6 +148,24 @@ components:
           description: Greeting message
         menu_options:
           type: array
+          items:
+            $ref: '#/components/schemas/MenuOption'
+    AutoAttendant:
+      type: object
+      description: An auto-attendant (IVR) configuration
+      properties:
+        id:
+          type: string
+          description: Auto-attendant identifier
+        name:
+          type: string
+          description: Display name
+        greeting:
+          type: string
+          description: Greeting message or audio file path
+        menu_options:
+          type: array
+          description: DTMF menu options
           items:
             $ref: '#/components/schemas/MenuOption'
   securitySchemes:

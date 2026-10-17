@@ -206,6 +206,22 @@ paths:
           description: WebAdmin server hostname
 components:
   schemas:
+    CallControlRequest:
+      type: object
+      description: Call control action request
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: Control action to execute
+          enum:
+          - startSuppression
+          - stopSuppression
+          - kill
+          - wait_transfer
+          - wait_redirect
+          - wait_kill
     Call:
       type: object
       description: A call record in the contact center
@@ -238,22 +254,6 @@ components:
         duration:
           type: integer
           description: Call duration in seconds
-    CallControlRequest:
-      type: object
-      description: Call control action request
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          description: Control action to execute
-          enum:
-          - startSuppression
-          - stopSuppression
-          - kill
-          - wait_transfer
-          - wait_redirect
-          - wait_kill
     Call_2:
       type: object
       description: An active or completed phone call
@@ -307,6 +307,16 @@ components:
         caller_id:
           type: string
           description: Caller ID to present to the called party
+    CallControlResponse:
+      type: object
+      description: Response from a call control action
+      properties:
+        success:
+          type: boolean
+          description: Whether the action was successful
+        message:
+          type: string
+          description: Result message
     CallControlRequest_2:
       type: object
       description: Request body for call control actions
@@ -327,16 +337,6 @@ components:
         destination:
           type: string
           description: Transfer destination (required for transfer action)
-    CallControlResponse:
-      type: object
-      description: Response from a call control action
-      properties:
-        success:
-          type: boolean
-          description: Whether the action was successful
-        message:
-          type: string
-          description: Result message
   securitySchemes:
     bearerAuth:
       type: http

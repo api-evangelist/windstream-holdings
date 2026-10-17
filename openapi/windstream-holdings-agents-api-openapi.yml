@@ -82,19 +82,6 @@ paths:
                 $ref: '#/components/schemas/AgentState'
 components:
   schemas:
-    PresenceOption:
-      type: object
-      description: An agent presence/status option
-      properties:
-        id:
-          type: string
-          description: Presence option identifier
-        name:
-          type: string
-          description: Display name (e.g., Available, Busy, On Break)
-        available_for_calls:
-          type: boolean
-          description: Whether agent is available to receive calls in this state
     AgentState:
       type: object
       description: Current agent state/presence
@@ -112,6 +99,19 @@ components:
           type: string
           format: date-time
           description: Timestamp of last state change
+    PresenceOption:
+      type: object
+      description: An agent presence/status option
+      properties:
+        id:
+          type: string
+          description: Presence option identifier
+        name:
+          type: string
+          description: Display name (e.g., Available, Busy, On Break)
+        available_for_calls:
+          type: boolean
+          description: Whether agent is available to receive calls in this state
     AgentStateUpdate:
       type: object
       description: Agent state update request
